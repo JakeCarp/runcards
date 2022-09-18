@@ -9,7 +9,7 @@ export class RunCardController extends BaseController {
     super('api/runcards')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id', this.getById)
+      .get('/:id', this.getByGroupId)
       .use(CheckRole)
         .post('', this.create)
       .put('/:id', this.update)

@@ -12,6 +12,10 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
+    path: '/cards',
+    component: loadPage('CardsPage')
+  },
+  {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')

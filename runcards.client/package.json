@@ -10,6 +10,7 @@
     "@bcwdev/auth0provider-client": "^0.0.13",
     "@mdi/font": "^7.0.96",
     "@popperjs/core": "^2.11.6",
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "socket.io-client": "^4.5.1",
