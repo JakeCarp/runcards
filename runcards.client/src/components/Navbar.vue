@@ -1,11 +1,11 @@
 <template>
-  <div class="row bg-dark nav align-items-center justify-content-between">
+  <div class="bg-dark nav align-items-center justify-content-between">
     <div class="col-4">
-      <h1>DPatch</h1>
+      <h1 class="ms-2">DPatch</h1>
     </div>
     <!-- TODO needs to be user.isAuthenticated -->
     <div class="col-4 text-end">
-      <button class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#information" aria-controls="information">Information</button>
+      <button class="btn btn-warning me-2" data-bs-toggle="offcanvas" data-bs-target="#information" aria-controls="information">Information</button>
     </div>
 
     <div class="offcanvas offcanvas-end text-dark" tabindex="-1" id="information" aria-labelledby="informationLabel">
