@@ -1,12 +1,6 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer class="bg-dark text-light text-end p-4">
-      <div class="col-4 text-end">
+    <div class="bg-dark text-light text-end p-4">
+        <div class="col-4 text-end">
       <button class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#information" aria-controls="information">Information</button>
     </div>
 
@@ -137,23 +131,20 @@
           </div>
         </div>
   </div>
-</div>
-  </footer>
+
+    </div>
+    </div>
 </template>
 
-<script>
-import { computed } from 'vue';
-import { AppState } from './AppState';
 
+<script>
 export default {
-  name: 'App',
-  setup() {
-    return {
-      appState: computed(() => AppState)
-    }
-  }
-}
+    setup(){
+        return {}
+    }}
 </script>
-<style lang="scss">
-@import "./assets/scss/main.scss";
+
+
+<style lang="scss" scoped>
+
 </style>
