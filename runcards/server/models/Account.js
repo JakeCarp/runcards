@@ -8,7 +8,7 @@ export const AccountSchema = new Schema(
     name: { type: String, required: true },
     picture: { type: String },
     // NOTE If you wish to add additional properties do so here
-    admin: {type: Boolean, required: true}
+    admin: {type: Boolean}
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

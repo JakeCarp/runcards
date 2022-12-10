@@ -103,11 +103,11 @@ app.use("/user-profile", getAuthorizedUserInfo, (req, res, next) => {
 // validates the request token, extracts the userIdentity and userInfo
 // fails if role is not found in the token
 // Enable RBAC or Extended Rules
-app.use(
-  "/admins-only",
-  auth0Provider.hasRoles("admin"),
-  (req, res, next) => {}
-);
+// app.use(
+//   "/admins-only",
+//   auth0Provider.hasRoles("admin"),
+//   (req, res, next) => {}
+// );
 
 // validates the request token, extracts the userIdentity and userInfo
 // fails if any permission is not found in the token
