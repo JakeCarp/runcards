@@ -1,5 +1,5 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { runCardService } from '../services/RunCardService'
+import { runGroupService } from '../services/RunGroupService'
 
 import BaseController from '../utils/BaseController'
 import { CheckRole } from '../utils/CheckRole'
@@ -17,8 +17,8 @@ export class RunGroupController extends BaseController {
 
   async getAll(req, res, next) {
     try {
-      const cards = await runCardService.getAll()
-      res.send(cards)
+      const groups = await runGroupService.getAll()
+      res.send(groups)
     } catch (error) {
       next(error)
     }
@@ -27,7 +27,7 @@ export class RunGroupController extends BaseController {
 
   async create(req, res, next) {
     try {
-      const newForm = await runCardService.create(req.body)
+      const newForm = await runGroupService.create(req.body)
       res.send(newForm)
     } catch (error) {
       next(error)
@@ -36,7 +36,7 @@ export class RunGroupController extends BaseController {
 
   async update(req, res, next) {
     try {
-      const updated = await runCardService.update(req.body, req.params.id)
+      const updated = await runGroupService.update(req.body, req.params.id)
       res.send(updated)
     } catch (error) {
       next(error)

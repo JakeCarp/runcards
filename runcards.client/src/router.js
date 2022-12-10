@@ -12,8 +12,16 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
-    path: '/cards',
-    component: loadPage('CardsPage')
+    path: '/groups',
+    name: 'Run Groups',
+    component: loadPage('RunGroupsPage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/card',
+    name: 'Run Card',
+    component: loadPage('RunCardPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/about',

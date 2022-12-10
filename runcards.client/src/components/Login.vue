@@ -51,6 +51,7 @@
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
+import { router } from '../router';
 export default {
   setup() {
     return {
@@ -58,6 +59,7 @@ export default {
       account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup();
+        router.push({ name: 'Groups' })
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin });
