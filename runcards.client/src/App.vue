@@ -1,6 +1,6 @@
 <template>
   <main>
-    <side-nav v-if="route.path !== '/card'"></side-nav>
+    <side-nav v-if="(route.path !== '/card' && route.path !== '/')"></side-nav>
     <router-view />
   </main>
   <footer>

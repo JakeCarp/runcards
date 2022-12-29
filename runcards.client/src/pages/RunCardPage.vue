@@ -1,7 +1,7 @@
 <template>
-    <div class="container ms-0 ps-0">
+    <div class="container">
         <div class="row justify-content-between">
-            <div class="col-3">
+            <div class="col-2 ps-0">
                 <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
                     <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                         <span class="fs-5 fw-semibold">Related Cards</span>
@@ -11,7 +11,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="card col-6">
+            <div class="card col-6 p-3">
                 <editor :api-key="tinyApiKey" :init="{
     plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
     menubar: 'file edit view insert format tools table help',
@@ -19,8 +19,8 @@
 
                 }" />
             </div>
-            <div class="col-3">
-
+            <div class="col-3 pe-0">
+                <input-bar></input-bar>
             </div>
         </div>
     </div>
@@ -36,6 +36,7 @@ import { useRoute } from 'vue-router'
 import { runCardService } from '../services/RunCardService'
 import {tinyApiKey} from '../env'
 import { AppState } from '../AppState'
+import InputBar from '../components/InputBar.vue'
 
 export default {
   components: { 'editor': Editor},

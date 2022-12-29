@@ -10,15 +10,36 @@ export class RunGroupController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
+      .get('/mayday', this.getMayday)
+      .get('/emergency', this.getEmergency)
       .use(CheckRole)
       .post('', this.create)
       .put('/:id', this.update)
+      .delete('/:id', this.delete)
   }
 
   async getAll(req, res, next) {
     try {
       const groups = await runGroupService.getAll()
       res.send(groups)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getMayday(req, res, next) {
+    try {
+      const group = await runGroupService.getMayday()
+      res.send(group)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getEmergency(req, res, next) {
+    try {
+      const group = await runGroupService.getEmergency()
+      res.send(group)
     } catch (error) {
       next(error)
     }
@@ -38,6 +59,15 @@ export class RunGroupController extends BaseController {
     try {
       const updated = await runGroupService.update(req.body, req.params.id)
       res.send(updated)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async delete(req, res, next){
+    try {
+      const message = await runGroupService.delete(req.params.id)
+      res.send(message)
     } catch (error) {
       next(error)
     }

@@ -41,4 +41,13 @@ export class RunCardController extends BaseController {
       next(error)
     }
   }
+
+  async delete(req, res, next){
+    try {
+      const message = await runCardService.delete(req.params.id)
+      res.send(message)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

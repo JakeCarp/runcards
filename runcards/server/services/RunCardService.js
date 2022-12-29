@@ -16,5 +16,10 @@ class RunCardService {
     const updatedCard = await dbContext.RunCard.findByIdAndUpdate(id, body, { new: true })
     return updatedCard
   }
+
+  async delete(id) {
+    await dbContext.RunGroup.findByIdAndDelete(id)
+    return 'Run Card Deleted'
+  }
 }
 export const runCardService = new RunCardService()

@@ -5,12 +5,12 @@
           <span class="fs-5 fw-semibold">NFD Stations</span>
         </div>
         <ul class="list-unstyled ps-0">
-          <li v-for="station in stations" :key="station.id" class="mb-1">
+          <li v-for="station in stations" :key="station.id" class="mb-2">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-              :data-bs-target="'#'+station.id" aria-expanded="true">
+              :data-bs-target="'#station'+station.id" aria-expanded="true">
               {{station.name}}
             </button>
-            <div class="collapse" :id="station.id">
+            <div class="collapse" :id="'station' + station.id">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li v-for="zone in station.zones" :key="zone"><a @click="setZone(station.name, zone)" class="link-dark rounded">{{zone}}</a></li>
               </ul>
