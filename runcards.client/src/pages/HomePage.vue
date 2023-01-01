@@ -52,7 +52,8 @@ import { computed } from "@vue/reactivity"
 import { AuthService } from "../services/AuthService"
 import { AppState } from "../AppState"
 import { useRouter } from 'vue-router'
-import { watchEffect } from "@vue/runtime-core"
+import { logger } from "../utils/Logger"
+import {router} from '../router'
 export default {
   setup() {
     const router = useRouter()
@@ -64,8 +65,12 @@ export default {
     return {
       router,
       async login() {
-        await AuthService.loginWithPopup()
-        router.push({ name: 'Home' })
+        try {
+          await AuthService.loginWithPopup()
+          router.push({ name: 'RunGroups' })
+        } catch (error) {
+          logger.error(error)
+        }
       },
       logout() {
         AuthService.logout({ returnTo: window.location.origin })

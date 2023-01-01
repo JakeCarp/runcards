@@ -13,15 +13,15 @@ const routes = [
   },
   {
     path: '/groups',
-    name: 'Run Groups',
+    name: 'RunGroups',
     component: loadPage('RunGroupsPage'),
-    // beforeEnter: authGuard
+    beforeEnter: authGuard
   },
   {
     path: '/card',
-    name: 'Run Card',
+    name: 'RunCard',
     component: loadPage('RunCardPage'),
-    // beforeEnter: authGuard
+    beforeEnter: authGuard
   },
   {
     path: '/about',

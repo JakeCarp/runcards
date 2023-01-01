@@ -8,7 +8,7 @@ export default class Pop {
  * @param {string} text The body text.
  * @param {string} confirmButtonText The text of your confirm button.
  * @param {'success' | 'error' | 'info' | 'warning' | 'question'} icon Pop icon
- * 
+ *
  * {@link https://sweetalert2.github.io/#configuration|Check out Sweet Alerts}
  */
   static async confirm(title = 'Are you sure?', text = "You won't be able to revert this!", confirmButtonText = 'Yes', icon = 'warning') {
@@ -21,7 +21,7 @@ export default class Pop {
         showCancelButton: true,
         reverseButtons: true,
         confirmButtonColor: 'var(--bs-primary)',
-        cancelButtonColor: 'var(--bs-secondary)'
+        cancelButtonColor: 'var(--bs-danger)'
       })
       if (res.isConfirmed) {
         return true
