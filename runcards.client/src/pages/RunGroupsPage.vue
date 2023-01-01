@@ -23,8 +23,6 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import RunGroup from '../components/RunGroup.vue'
-import { router } from '../router'
 
 export default {
     setup() {
