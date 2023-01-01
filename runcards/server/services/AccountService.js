@@ -12,7 +12,8 @@ async function createAccountIfNeeded(account, user) {
     user._id = user.id
     account = await dbContext.Account.create({
       ...user,
-      subs: [user.sub]
+      subs: [user.sub],
+      admin: user.roles[0] ? true : false
     })
   }
   return account
