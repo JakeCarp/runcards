@@ -14,10 +14,10 @@ export default {
     props: {
         group: {type: Object, required: true}
     },
-    setup(){
+    setup(props){
         return {
             navToCardPage() {
-                router.push({ name: "Run Card", params: { groupId: props.group.id}})
+                router.push({ name: "group", params: { groupId: props.group.id}})
             }
         }
     }}
