@@ -7,7 +7,7 @@ class GroupService {
         try {
             const res = await api.get("/api/rungroups")
             AppState.emsGroups = res.data.filter(g => g.type === 1)
-            Appstate.fireGroups = res.data.filter(g => g.type === 2)
+            AppState.fireGroups = res.data.filter(g => g.type === 2)
         } catch (error) {
             logger.error(error)
         }

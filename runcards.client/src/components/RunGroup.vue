@@ -1,5 +1,5 @@
 <template>
-        <div @click="navToCardPage()" class="card ems col-3 m-3 selectable">
+        <div @click="navToCardPage()" class="card ems col-md-3 col-4 offset-md-2 m-3 selectable">
             <div class="card-body">
                 <h5 class="card-title">{{group.title}}</h5>
                 <p class="card-text">{{group.description}}</p>

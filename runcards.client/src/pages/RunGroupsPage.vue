@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-10">
-                <div v-if="!selectedStation" class="row justify-content center mt-3">
+            <div class="col-md-10 offset-md-2" v-if="!selectedStation">
+                <div v-if="!selectedStation" class="row justify-content text-center center mt-3">
                     <h3>Please Select A Zone</h3>
                 </div>
-                
+
                 <div class="row justify-content center mt-3">
                     <h1 class="col-md-10 offset-md-2 text-center">Station: {{selectedStation}}</h1>
                     <h2 class="col-md-10 offset-md-2 text-center">Zone: {{selectedZone}}</h2>
@@ -31,14 +31,14 @@
                     Create Run Card Group
                 </button>
             </div>
-            
-            
+
+
         </div>
     </div>
     <RunGroupFormModal/>
 </div>
-    
-    
+
+
 </template>
 
 
@@ -57,9 +57,9 @@ export default {
         })
         const selectedStation = computed(() => AppState.selectedStation)
         const selectedZone = computed(() => AppState.selectedZone)
-        const groups = computed(() => AppState.groups)
+        const emsGroups = computed(() => AppState.emsGroups)
+        const fireGroups = computed(() => AppState.fireGroups)
         return {
-            groups,
             selectedStation,
             selectedZone,
             emsGroups,
