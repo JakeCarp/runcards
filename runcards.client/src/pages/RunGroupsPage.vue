@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-10 text-center" v-if="!selectedStation">
+            <div class="col-md-10 offset-md-2 text-center" v-if="!selectedStation">
                     <h3>Please Select A Zone</h3>
             </div>
 
