@@ -5,8 +5,9 @@ import { api } from './AxiosService'
 class GroupService {
     async getGroups() {
         try {
-            const res = await api.get("/rungroups")
-            AppState.groups = res.data
+            const res = await api.get("/api/rungroups")
+            AppState.emsGroups = res.data.filter(g => g.type === 1)
+            Appstate.fireGroups = res.data.filter(g => g.type === 2)
         } catch (error) {
             logger.error(error)
         }
@@ -14,7 +15,7 @@ class GroupService {
 
     async createGroup(body) {
         try {
-            const res = await api.post("/rungroups", body)
+            const res = await api.post("/api/rungroups", body)
             AppState.groups.unshift(res.data)
         } catch (error) {
             logger.error(error)
@@ -40,6 +41,28 @@ class GroupService {
             logger.error(error)
         }
     }
+    async getCardsInMayday() {
+        try {
+            const group = await api.get("/rungroups/mayday")
+            const res = await api.get("/runcards/" + group.id)
+            AppState.cards = res.data
+            AppState.currentCard = res.data[0]
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+     async getCardsInEmergency() {
+        try {
+            const group = await api.get("/rungroups/emergency")
+            const res = await api.get("/runcards/" + group.id)
+            AppState.cards = res.data
+            AppState.currentCard = res.data[0]
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
 
     async getCardsInGroup(groupId) {
         try {

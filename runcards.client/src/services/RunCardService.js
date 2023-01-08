@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { runGroupService } from './RunGroupService'
 
 class CardService {
     setZone(station, zone) {
@@ -18,31 +19,15 @@ class CardService {
         }
     }
 
-    async getMayday() {
-        try {
-            const group = await api.get("/rungroups/mayday")
-            const res = await api.get("/runcards/" + group.id)
-            AppState.cards = res.data
-            AppState.currentCard = res.data[0]
-        } catch (error) {
-            logger.error(error)
-        }
-    }
+    
 
-    async getEmergency() {
-        try {
-            const group = await api.get("/rungroups/emergency")
-            const res = await api.get("/runcards/" + group.id)
-            AppState.cards = res.data
-            AppState.currentCard = res.data[0]
-        } catch (error) {
-            logger.error(error)
-        }
-    }
-
+   
     async createCard(body) {
         try {
             const res = await api.post("/runcards", body)
+            const group = Appstate.currentGroup
+            group.cards.unshift(res.data.id)
+            runGroupService.updateGroup(group, group.id)
             AppState.cards.unshift(res.data)
         } catch (error) {
             logger.error(error)

@@ -17,6 +17,9 @@ export const AppState = reactive({
   },
   channels: ['C1 CHARLES-1', 'C2 CHARLES-2', 'C3 CHARLES-3', 'C4 CHARLES-4', 'C5 CHARLES-5', 'C6 CHARLES-6', 'C7 CHARLES-7 MA', 'C8 CHARLES-8', 'C9 CHARLES-9', 'C10 CHARLES-10'],
   cards: [],
-  groups: [],
+  emsGroups: [],
+  fireGroups: [],
+  currentGroup: {},
+  currentCard: {},
   timeElapsed: 0
 })

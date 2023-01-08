@@ -12,12 +12,15 @@
                 </div>
             </div>
             <div class="card col-6 p-3">
-                <editor :api-key="tinyApiKey" :init="{
-    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
-    menubar: 'file edit view insert format tools table help',
-    toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
-
-                }" />
+                <editor 
+                output-format="html"
+                :api-key="tinyApiKey"
+                :init="{
+                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+                    menubar: 'file edit view insert format tools table help',
+                    toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+                    }"
+                v-model="currentCard.value.content" />
             </div>
             <div class="col-3 pe-0">
                 <input-bar></input-bar>
@@ -41,13 +44,35 @@ import InputBar from '../components/InputBar.vue'
 export default {
   components: { 'editor': Editor},
     setup() {
+        const cardContent = ref({})
+        const newCardData = ref({})
         const route = useRoute()
-        onMounted(() => {
-            // runCardService.getCardsInGroup(route.params.groupId);
-        })
         const cards = computed(() => AppState.cards)
         const currentCard = computed(() => AppState.currentCard)
+        onMounted(() => {
+            runCardService.getCardsInGroup(route.params.groupId);
+        })
         return {
+            cardContent,
+            newCardData,
+            async createCard() {
+                try {
+                    await runCardService.createCard(newCardData.value)
+                    Pop.toast('Run Card Created', 'success')
+                } catch (error) {
+                    logger.error(error)
+                    Pop.toast('Something went wrong!', 'error')
+                }
+            },
+            async updateCard() {
+                try {
+                    await runCardService.updateCard(cardContent, currentcard.id)
+                    Pop.toast('Run Card Updated', 'success')
+                } catch (error) {
+                    logger.error(error)
+                    Pop.toast('Something went wrong!', 'error')
+                }
+            },
             tinyApiKey,
             cards,
             currentCard
