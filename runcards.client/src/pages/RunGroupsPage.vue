@@ -1,29 +1,38 @@
 <template>
     <div class="container">
         <div class="row">
-
-            <div class="col-md-10 offset-md-2" v-if="!selectedStation">
-                <div v-if="!selectedStation" class="row justify-content text-center center mt-3">
+            <div class="col-md-10 text-center" v-if="!selectedStation">
                     <h3>Please Select A Zone</h3>
-                </div>
+            </div>
 
-                <div class="row justify-content center mt-3">
-                    <h1 class="col-md-10 offset-md-2 text-center">Station: {{selectedStation}}</h1>
-                    <h2 class="col-md-10 offset-md-2 text-center">Zone: {{selectedZone}}</h2>
-                </div>
-                <div class="row">
-                    <h3 class="col-md-10 offset-md-2 text-center">EMS</h3>
-            </div>
-            <div  class="row p-4 justify-content-between">
-                <RunGroup  v-for="group in emsGroups" :key="group.id" :group="group"></RunGroup>
-            </div>
-            <div class="row">
-                <h3 class="col-md-10 offset-md-2  text-center">Fire</h3>
-            </div>
-            <div class="row p-4 justify-content-between">
+                    <div class="col-md-10 offset-md-2 text-center">
+                      <h1>Station: {{selectedStation}}</h1>
+                      </div>
+
+                    <div class="col-md-10 offset-md-2 text-center">
+                      <h2>Zone: {{selectedZone}}</h2>
+                      </div>
+
+                    <div class="col-md-10 offset-md-2 text-center">
+                      <h3>
+                        EMS
+                      </h3>
+                      </div>
+
+                      <div class="col-md-10 offset-md-3">
+                        <div class="row">
+                        <RunGroup  v-for="group in emsGroups" :key="group.id" :group="group"></RunGroup>
+                        </div>
+                      </div>
+
+                <div class="col-md-10 offset-md-2  text-center">
+                  <h3>
+                    Fire
+                  </h3>
+                  </div>
+
                 <RunGroup v-for="group in fireGroups" :key="group.id" :group="group"></RunGroup>
-            </div>
-        </div>
+
         <div class="col-2">
             <!-- Button trigger modal -->
             <div class="d-flex justify-self-end mt-3">
@@ -31,11 +40,9 @@
                     Create Run Card Group
                 </button>
             </div>
-
-
         </div>
-    </div>
     <RunGroupFormModal/>
+        </div>
 </div>
 
 
