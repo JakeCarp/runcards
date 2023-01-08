@@ -54,20 +54,20 @@ import { AppState } from "../AppState"
 import { useRouter } from 'vue-router'
 import { logger } from "../utils/Logger"
 import {router} from '../router'
+import { watchEffect } from "@vue/runtime-core"
 export default {
   setup() {
     const router = useRouter()
-    // watchEffect(() => {
-    //   if (AppState.account.id) {
-    //     router.push({ name: 'Home' })
-    //   }
-    // })
+    watchEffect(() => {
+      if (AppState.account.id) {
+         router.push({ name: 'RunGroups' })
+      }
+    })
     return {
       router,
       async login() {
         try {
           await AuthService.loginWithPopup()
-          router.push({ name: 'RunGroups' })
         } catch (error) {
           logger.error(error)
         }
