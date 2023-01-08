@@ -1,6 +1,6 @@
 export class RunGroup {
     constructor(data) {
-        this.id = data.id
+        this.id = data._id
         this.type = data.type
         this.title = data.title
         this.cards = data.cards

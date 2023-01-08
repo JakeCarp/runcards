@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import { RunGroup } from '../models/RunGroup'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -6,8 +7,11 @@ class GroupService {
     async getGroups() {
         try {
             const res = await api.get("/api/rungroups")
-            AppState.emsGroups = res.data.filter(g => g.type === 1)
-            AppState.fireGroups = res.data.filter(g => g.type === 2)
+            const emsGroups = res.data.filter(g => g.type === 1)
+
+            const fireGroups = res.data.filter(g => g.type === 2)
+            AppState.emsGroups = emsGroups.map(g => new RunGroup(g))
+            AppState.fireGroups = fireGroups.map(g => new RunGroup(g))
         } catch (error) {
             logger.error(error)
         }
