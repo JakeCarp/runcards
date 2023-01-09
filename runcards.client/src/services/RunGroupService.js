@@ -20,7 +20,11 @@ class GroupService {
     async createGroup(body) {
         try {
             const res = await api.post("/api/rungroups", body)
-            AppState.groups.unshift(res.data)
+            if(res.data.type === 1){
+              AppState.emsGroups.unshift(res.data)
+            } else {
+              AppState.fireGroups.unshift(res.data)
+            }
         } catch (error) {
             logger.error(error)
         }

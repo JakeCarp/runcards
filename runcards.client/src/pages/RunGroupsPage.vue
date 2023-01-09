@@ -1,6 +1,12 @@
 <template>
     <div class="container">
         <div class="row">
+        <div class="col-md-10 offset-md-2 text-end mt-2">
+            <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupCreateModal">
+                    Create Run Card Group
+                </button>
+        </div>
             <div class="col-md-10 offset-md-2 text-center" v-if="!selectedStation">
                     <h3>Please Select A Zone</h3>
             </div>
@@ -19,7 +25,7 @@
                       </h3>
                       </div>
 
-                      <div class="col-md-10 offset-md-3">
+                      <div class="col-md-9 offset-md-3">
                         <div class="row">
                         <RunGroup  v-for="group in emsGroups" :key="group.id" :group="group"></RunGroup>
                         </div>
@@ -31,16 +37,13 @@
                   </h3>
                   </div>
 
+                   <div class="col-md-9 offset-md-3">
+                        <div class="row">
                 <RunGroup v-for="group in fireGroups" :key="group.id" :group="group"></RunGroup>
 
-        <div class="col-2">
-            <!-- Button trigger modal -->
-            <div class="d-flex justify-self-end mt-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupCreateModal">
-                    Create Run Card Group
-                </button>
-            </div>
-        </div>
+                        </div>
+                      </div>
+
     <RunGroupFormModal/>
         </div>
 </div>

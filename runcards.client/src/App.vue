@@ -6,6 +6,7 @@
       </div>
     </div>
   </header>
+
   <main>
     <router-view />
     <ResourceOffcanvas/>
@@ -46,4 +47,9 @@ export default {
 .cursor-pointer{
  cursor: pointer;
 }
+
+main{
+  overflow-y: auto;
+}
+
 </style>
