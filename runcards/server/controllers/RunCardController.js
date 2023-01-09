@@ -11,8 +11,9 @@ export class RunCardController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:groupId', this.getByGroupId)
       .use(CheckRole)
-        .post('', this.create)
+      .post('', this.create)
       .put('/:id', this.update)
+      .delete('/:id', this.delete)
   }
 
   async getByGroupId(req, res, next) {

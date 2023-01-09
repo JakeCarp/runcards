@@ -10,6 +10,7 @@
 
 <script>
 import { router } from '../router'
+import { runGroupService } from '../services/RunGroupService'
 export default {
     props: {
         group: {type: Object, required: true}
@@ -17,7 +18,8 @@ export default {
     setup(props){
         return {
             navToCardPage() {
-                router.push({ name: "group", params: { groupId: props.group.id}})
+                runGroupService.setCurrentGroup(props.group)
+                router.push({ name: "group", params: { groupId: props.group.id } })
             }
         }
     }}

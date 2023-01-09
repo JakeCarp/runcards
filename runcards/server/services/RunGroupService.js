@@ -6,6 +6,11 @@ class RunGroupService {
     return groups
   }
 
+  async getById(id) {
+    const group = await dbContext.RunGroup.findById(id)
+    return group
+  }
+
   async getMayday() {
     const group = await dbContext.RunGroup.findOne({ type: 3 })
     return group;
