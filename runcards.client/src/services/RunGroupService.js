@@ -17,6 +17,15 @@ class GroupService {
         }
     }
 
+    async getGroupById(id) {
+        try {
+            const res = await api.get("/api/rungroups/" + id)
+            AppState.currentGroup = res.data
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
     async createGroup(body) {
         try {
             const res = await api.post("/api/rungroups", body)
@@ -32,7 +41,7 @@ class GroupService {
 
     async updateGroup(body, id) {
         try {
-            const res = await api.put("/rungroups/" + id, body)
+            const res = await api.put("/api/rungroups/" + id, body)
             let updated = res.data
             let index = Appstate.groups.findIndex(g => g.id === updated.id)
             Appstate.groups.splice(index, 1, updated)
@@ -43,7 +52,7 @@ class GroupService {
 
     async deleteGroup(id) {
         try {
-            const res = await api.delete("/rungroups/" + id)
+            const res = await api.delete("/api/rungroups/" + id)
             Appstate.groups = Appstate.groups.filter(g => g.id === id)
         } catch (error) {
             logger.error(error)
@@ -51,8 +60,8 @@ class GroupService {
     }
     async getCardsInMayday() {
         try {
-            const group = await api.get("/rungroups/mayday")
-            const res = await api.get("/runcards/" + group.id)
+            const group = await api.get("/api/rungroups/mayday")
+            const res = await api.get("/api/runcards/" + group.id)
             AppState.cards = res.data
             AppState.currentCard = res.data[0]
         } catch (error) {
@@ -62,8 +71,8 @@ class GroupService {
 
      async getCardsInEmergency() {
         try {
-            const group = await api.get("/rungroups/emergency")
-            const res = await api.get("/runcards/" + group.id)
+            const group = await api.get("/api/rungroups/emergency")
+            const res = await api.get("/api/runcards/" + group.id)
             AppState.cards = res.data
             AppState.currentCard = res.data[0]
         } catch (error) {
@@ -71,15 +80,8 @@ class GroupService {
         }
     }
 
-
-    async getCardsInGroup(groupId) {
-        try {
-            const res = await api.get("/runcards/" + groupId)
-            AppState.cards = res.data
-            AppState.currentCard = res.data[0]
-        } catch (error) {
-            logger.error(error)
-        }
+    setCurrentGroup(group) {
+        AppState.currentGroup = group
     }
 }
 

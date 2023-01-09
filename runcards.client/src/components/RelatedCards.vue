@@ -4,34 +4,28 @@
             <span class="fs-5 fw-semibold">Related Cards</span>
         </div>
         <ul class="list-unstyled ps-0 scroll">
-            <li class="mb-2">
-                TEST
-            </li>
-            <li class="mb-2">
-                TEST
-            </li>
-            <li class="mb-2">
-                TEST
-            </li>
-            <li class="mb-2">
-                TEST
-            </li>
-            <li class="mb-2">
-                TEST
+            <li v-for="card in cards" :key="card.id" @click="setCurrentCard(card)" class="mb-2">
+               {{ card.title }}
             </li>
         </ul>
         <div class="bottom mb-3">
             <button class="btn btn-primary mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
+                <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
         </div>
     </div>
 </template>
 
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
-    setup(){
-        return {}
+    setup() {
+        const cards = computed(() => AppState.cards)
+        return {
+            cards
+        }
     }}
 </script>
 

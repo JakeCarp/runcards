@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-
+<RunCardFormModal></RunCardFormModal>
 </template>
 
 
@@ -34,6 +34,8 @@ import {tinyApiKey} from '../env'
 import { AppState } from '../AppState'
 import InputBar from '../components/InputBar.vue'
 import RelatedCards from '../components/RelatedCards.vue'
+import RunCardFormModal from '../components/RunCardFormModal.vue'
+import { runGroupService } from '../services/RunGroupService'
 
 export default {
   components: { 'editor': Editor},
@@ -44,6 +46,7 @@ export default {
         const cards = computed(() => AppState.cards)
         const currentCard = computed(() => AppState.currentCard)
         onMounted(() => {
+            runGroupService.getGroupById(route.params.groupId)
             runCardService.getCardsInGroup(route.params.groupId);
         })
         return {

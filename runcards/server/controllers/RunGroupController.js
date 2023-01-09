@@ -10,6 +10,7 @@ export class RunGroupController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
+      .get('/:id', this.getById)
       .get('/mayday', this.getMayday)
       .get('/emergency', this.getEmergency)
       .use(CheckRole)
@@ -22,6 +23,15 @@ export class RunGroupController extends BaseController {
     try {
       const groups = await runGroupService.getAll()
       res.send(groups)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getById(req, res, next) {
+    try {
+      const group = await runGroupService.getById(req.params.id)
+      res.send(group)
     } catch (error) {
       next(error)
     }
