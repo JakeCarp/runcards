@@ -18,7 +18,7 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/group/:groupId',
+    path: '/group/:groupId/card/:cardId?',
     name: 'group',
     component: loadPage('RunGroupPage'),
     beforeEnter: authGuard

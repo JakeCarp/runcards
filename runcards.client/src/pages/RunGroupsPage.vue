@@ -1,55 +1,58 @@
 <template>
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-2 text-end mt-2">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aundefineda">
+          Create Run Card Group
+        </button>
+      </div>
+      <div class="col-md-10 offset-md-2 text-center" v-if="!selectedStation">
+        <h3>Please Select A Zone</h3>
+      </div>
+      
+      <div class="col-md-10 offset-md-2 text-center">
+        <h1>Station: {{selectedStation}}</h1>
+      </div>
+      
+      <div class="col-md-10 offset-md-2 text-center">
+        <h2>Zone: {{selectedZone}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 offset-md-2 text-center">
+        <h3>
+          EMS
+        </h3>
+      </div>
+      
+      <div class="col-md-9 offset-md-3">
         <div class="row">
-        <div class="col-md-10 offset-md-2 text-end mt-2">
-            <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupCreateModal">
-                    Create Run Card Group
-                </button>
+          <RunGroup  v-for="group in emsGroups" :key="group.id" :group="group"></RunGroup>
         </div>
-            <div class="col-md-10 offset-md-2 text-center" v-if="!selectedStation">
-                    <h3>Please Select A Zone</h3>
-            </div>
+      </div>
+    </div>
+    <div class="row">
 
-                    <div class="col-md-10 offset-md-2 text-center">
-                      <h1>Station: {{selectedStation}}</h1>
-                      </div>
-
-                    <div class="col-md-10 offset-md-2 text-center">
-                      <h2>Zone: {{selectedZone}}</h2>
-                      </div>
-
-                    <div class="col-md-10 offset-md-2 text-center">
-                      <h3>
-                        EMS
-                      </h3>
-                      </div>
-
-                      <div class="col-md-9 offset-md-3">
-                        <div class="row">
-                        <RunGroup  v-for="group in emsGroups" :key="group.id" :group="group"></RunGroup>
-                        </div>
-                      </div>
-
-                <div class="col-md-10 offset-md-2  text-center">
-                  <h3>
-                    Fire
-                  </h3>
-                  </div>
-
-                   <div class="col-md-9 offset-md-3">
-                        <div class="row">
-                <RunGroup v-for="group in fireGroups" :key="group.id" :group="group"></RunGroup>
-
-                        </div>
-                      </div>
-
+      <div class="col-md-10 offset-md-2  text-center">
+        <h3>
+          Fire
+        </h3>
+      </div>
+      
+      <div class="col-md-9 offset-md-3">
+        <div class="row">
+          <RunGroup v-for="group in fireGroups" :key="group.id" :group="group"></RunGroup>
+          
+        </div>
+      </div>
+      
+    </div>
+    </div>
     <RunGroupFormModal/>
-        </div>
-</div>
-
-
-</template>
+    
+    
+  </template>
 
 
 <script>
