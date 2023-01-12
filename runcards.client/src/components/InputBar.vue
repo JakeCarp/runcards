@@ -3,6 +3,9 @@
     <div class="card">
       <div class="card-body">
     <div>
+      <Timer></Timer>
+    </div>
+    <div>
       <label for="radio">ASSIGNED CALL CHANNEL:</label>
       <select name="radio">
         <option v-for="channel in channels" :key="channel">{{channel}}</option>
@@ -33,7 +36,9 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import Timer from './Timer.vue'
 export default {
+  components: { Timer },
   setup() {
     const channels = computed(() => AppState.channels)
     return {

@@ -18,7 +18,7 @@ export class RunCardController extends BaseController {
 
   async getByGroupId(req, res, next) {
     try {
-      const form = await runCardService.getByGroupId(req.params.id)
+      const form = await runCardService.getByGroupId(req.params.groupId)
       res.send(form)
     } catch (error) {
       next(error)

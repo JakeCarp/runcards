@@ -3,15 +3,17 @@
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
             <span class="fs-5 fw-semibold">Related Cards</span>
         </div>
-        <ul class="list-unstyled ps-0 scroll">
-            <li v-for="card in cards" :key="card.id" @click="setCurrentCard(card)" class="mb-2">
+        <ul v-if="cards.length > 0" class="list-unstyled ps-0 scroll">
+            <li v-for="card in cards" :key="card.id" @click="setCurrentCard(card)" :class="currentCard.id === card.id ? 'mb-2 selectable current' : 'mb-2 selectable'">
                {{ card.title }}
             </li>
         </ul>
-        <div class="bottom mb-3">
-            <button class="btn btn-primary mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
+        <div class="panel mb-3">
+            <button class="btn btn-primary  mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
-                <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
+
+            <button class="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
+            
         </div>
     </div>
 </template>
@@ -20,25 +22,36 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { runCardService } from '../services/RunCardService'
+import { useRouter } from 'vue-router'
 export default {
-    setup() {
-        const cards = computed(() => AppState.cards)
+    props: {
+        cards: Array,
+    },
+    setup(props) {
+        const router = useRouter()
+        const currentCard = computed(() => AppState.currentCard)
         return {
-            cards
+            router,
+            currentCard,
+            setCurrentCard(card) {
+                runCardService.setCurrentCard(card)
+                router.push({ name: "group", params: { groupId: card.groupId, cardId: card.id } })
+            }
         }
     }}
 </script>
 
 
 <style lang="scss" scoped>
-.bottom {
-    position: absolute;
-    bottom: 0;
-}
 
 .sidenav {
     width: 280px;
     height: 90vh;
+}
+
+.current {
+    font-weight: bold;
 }
 
 .scroll {

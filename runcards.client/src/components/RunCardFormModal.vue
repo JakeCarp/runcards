@@ -31,16 +31,30 @@ import { ref } from '@vue/reactivity'
 import { runCardService } from '../services/RunCardService'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
+import { Modal } from 'bootstrap'
+import { useRouter } from 'vue-router'
 export default {
-    setup(){
+    props: {
+        group: {
+            type: Object,
+            required: true
+        }
+    },
+    setup(props){
         const cardTitle = ref('')
-        const currentGroup = computed(() => AppState.currentGroup)
+        const currentCard = computed(() => AppState.currentCard)
+        const router = useRouter()
         return {
+            currentCard,
+            router,
             cardTitle,
-            currentGroup,
             async handleSubmit() {
                 try {
-                    await runCardService.createCard({ title: cardTitle, content: '', groupId: currentGroup.id })
+                    await runCardService.createCard({ title: cardTitle.value, content: '', groupId: props.group.id })
+                    router.push({ name: 'group', params: { groupId: props.group.id, cardId: currentCard.id}})
+                    Modal.getOrCreateInstance(document.getElementById('cardCreateModal')).hide()
                     Pop.toast('Run Card Created!', 'success')
                 } catch (error) {
                     logger.error(error)

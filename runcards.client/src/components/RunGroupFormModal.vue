@@ -1,7 +1,7 @@
 <template>
     <div class="RunGroupFormModal">
         <!-- Modal -->
-        <div class="modal fade" id="groupCreateModal" tabindex="-1" role="dialog" aria-labelledby="groupCreateModalLabel"
+        <div class="modal fade" :id="'a' + groupData.id + 'a'" tabindex="-1" role="dialog" aria-labelledby="groupCreateModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -47,6 +47,9 @@
 <script>
 import { ref, watchEffect } from '@vue/runtime-core'
 import { runGroupService } from '../services/RunGroupService'
+import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
+import { Modal } from 'bootstrap'
 export default {
     props: {
         group: {
@@ -63,15 +66,21 @@ export default {
             async handleSubmit() {
                 try {
                     if (groupData.value.id) {
-                        await runGroupService.updateGroup(groupData.value)
+                        await runGroupService.updateGroup(groupData.value, groupData.value.id)
                         Pop.toast('Run Card Group Edited!', 'success')
                     } else {
                         await runGroupService.createGroup(groupData.value)
                         Pop.toast('Run Card Group Created!', 'success')
                         groupData.value = {}
                     }
-                    const modalElem = document.getElementById('groupCreateModal')
-                    Modal.getorCreateInstance(modalElem).hide()
+                    let modalElem 
+                    if (groupData.value.id) {
+                        modalElem = document.getElementById('a' + groupData.value.id + 'a')
+                    } else {
+                        modalElem = document.getElementById('aundefineda')
+                    }
+                    console.log(modalElem)
+                    Modal.getOrCreateInstance(modalElem).hide()
                 } catch (error) {
                     logger.error(error)
                     Pop.toast(error.message, 'error')
