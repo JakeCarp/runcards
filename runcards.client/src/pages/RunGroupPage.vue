@@ -8,7 +8,7 @@
                 <div class="card-header text-center">
                    {{ currentCard.title }}
                 </div>
-                <editor 
+                <editor
                 output-format="html"
                 :api-key="tinyApiKey"
                 :init="{
@@ -35,7 +35,7 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
-import { computed, onBeforeMount, onMounted, ref, watch, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, ref, watch, watchEffect } from '@vue/runtime-core'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
 import { runCardService } from '../services/RunCardService'
@@ -66,7 +66,7 @@ export default {
         const currentCard = computed(() => AppState.currentCard)
         const currentGroup = computed(() => AppState.currentGroup)
         watchEffect(() => {
-            cardContent.value = currentCard.value.content
+            cardContent.value = currentCard.value?.content
         })
         return {
             selectedStation,
@@ -87,7 +87,7 @@ export default {
              } catch (error) {
                     logger.error(error.message)
                     Pop.toast('Something went wrong!', 'error')
-             }   
+             }
             }
         }
     }}

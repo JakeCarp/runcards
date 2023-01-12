@@ -6,6 +6,7 @@ import { api } from './AxiosService'
 class GroupService {
     async getGroups() {
         try {
+          debugger
             const res = await api.get("/api/rungroups")
             const emsGroups = res.data.filter(g => g.type === 1)
 
@@ -19,6 +20,7 @@ class GroupService {
 
     async getGroupById(id) {
         try {
+          debugger
             const res = await api.get("/api/rungroups/" + id)
             AppState.currentGroup = new RunGroup(res.data)
         } catch (error) {

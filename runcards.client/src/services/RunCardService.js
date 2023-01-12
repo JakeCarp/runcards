@@ -13,8 +13,9 @@ class CardService {
 
     async getCardsInGroup(groupId) {
         try {
-            const res = await api.get("/api/runcards/" + groupId) 
-            console.log(res.data)
+            const res = await api.get("/api/runcards/" + groupId)
+            console.log("res", res.data)
+
             let newArr = res.data.map(c =>  new RunCard(c))
             let orderedArray = []
             AppState.currentGroup.cards.forEach(c => {
@@ -27,7 +28,7 @@ class CardService {
         } catch (error) {
             logger.error(error)
         }
-    }   
+    }
     async createCard(body) {
         try {
             const res = await api.post("/api/runcards", body)
