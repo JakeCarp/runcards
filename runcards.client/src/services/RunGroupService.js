@@ -74,23 +74,28 @@ class GroupService {
             logger.error(error)
         }
     }
-    async getCardsInMayday() {
+    async getMaydayGroup() {
         try {
-            const group = await api.get("/api/rungroups/mayday")
-            const res = await api.get("/api/runcards/" + group.id)
-            AppState.cards = res.data
-            AppState.currentCard = res.data[0]
+            const res = await api.get("/api/rungroups/specialGroup/mayday")
+            console.log(res.data)
+            const group = new RunGroup(res.data)
+            AppState.currentGroup = group
+            AppState.cards = group.cards
+            AppState.currentCard = group.cards[0]
+            return new RunGroup(res.data)
         } catch (error) {
             logger.error(error)
         }
     }
 
-     async getCardsInEmergency() {
+     async getEmergencyGroup() {
         try {
-            const group = await api.get("/api/rungroups/emergency")
-            const res = await api.get("/api/runcards/" + group.id)
-            AppState.cards = res.data
-            AppState.currentCard = res.data[0]
+            const res = await api.get("/api/rungroups/specialGroup/emergency")
+            console.log(res.data)
+            const group = new RunGroup(res.data)
+            AppState.currentGroup = group
+            AppState.cards = group.cards
+            AppState.currentCard = group.cards[0]
         } catch (error) {
             logger.error(error)
         }

@@ -22,10 +22,10 @@
       </select>
     </div>
     <div class="my-3">
-      <button class="btn btn-danger">MAYDAY</button>
+      <button @click="navToMayday()" class="btn btn-danger">MAYDAY</button>
     </div>
     <div>
-      <button class="btn btn-danger">EMERGENCY</button>
+      <button @click="navToEmergency()" class="btn btn-danger">EMERGENCY</button>
     </div>
     </div>
     </div>
@@ -37,14 +37,50 @@
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Timer from './Timer.vue'
+import { runGroupService } from '../services/RunGroupService'
+import {  useRouter } from 'vue-router'
+import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
 export default {
   components: { Timer },
   setup() {
+    const router = useRouter()
     const channels = computed(() => AppState.channels)
     const currentGroup = computed(() => AppState.currentGroup)
+    const selectedStation = computed(() => AppState.selectedStation)
+    const selectedZone = computed(() => AppState.selectedZone)
     return {
+      selectedStation,
+      selectedZone,
+      router,
       currentGroup,
-      channels
+      channels,
+      async navToMayday() {
+        try {
+          const group = await runGroupService.getMaydayGroup()
+          if (group.cards.length > 0) {
+            router.push({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+          } else {
+            router.push({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async navToEmergency() {
+        try {
+          const group = await runGroupService.getEmergencyGroup()
+          if (group.cards.length > 0) {
+            router.push({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+          } else {
+            router.push({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }
