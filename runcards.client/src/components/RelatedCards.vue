@@ -1,5 +1,8 @@
 <template>
     <div class="flex-shrink-0 p-3 bg-white sidenav mt-2 shadow ">
+        <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none ">
+            <router-link to="/groups" class="fs-5 fw-semibold">Home</router-link>
+        </div>
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
             <span class="fs-5 fw-semibold">Related Cards</span>
         </div>
@@ -12,7 +15,7 @@
             <button class="btn btn-primary  mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
 
-            <button class="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
+            <button v-if="account.admin" class="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
             
         </div>
     </div>
@@ -34,7 +37,9 @@ export default {
         const currentCard = computed(() => AppState.currentCard)
         const selectedStation = computed(() => AppState.selectedStation)
         const selectedZone = computed(() => AppState.selectedZone)
+        const account = computed(() => AppState.account)
         return {
+            account,
             selectedStation,
             selectedZone,
             router,
@@ -61,6 +66,6 @@ export default {
 
 .scroll {
     overflow-y: auto;
-    height: 70vh;
+    height: 60vh;
 }
 </style>

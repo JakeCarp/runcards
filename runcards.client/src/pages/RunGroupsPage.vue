@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-10 offset-md-2 text-end mt-2">
+      <div v-if="account.admin" class="col-md-10 offset-md-2 text-end mt-2">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aundefineda">
           Create Run Card Group
@@ -66,13 +66,15 @@ export default {
   components: { RunGroupFormModal },
     setup() {
         onMounted(async () => {
-            await runGroupService.getGroups()
+          await runGroupService.getGroups()
         })
         const selectedStation = computed(() => AppState.selectedStation)
         const selectedZone = computed(() => AppState.selectedZone)
         const emsGroups = computed(() => AppState.emsGroups)
         const fireGroups = computed(() => AppState.fireGroups)
-        return {
+        const account = computed(() => AppState.account)
+      return {
+            account,
             selectedStation,
             selectedZone,
             emsGroups,

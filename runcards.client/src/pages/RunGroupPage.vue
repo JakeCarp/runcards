@@ -10,6 +10,7 @@
                 </div>
                 <editor
                 output-format="html"
+                :disabled="!account.admin"
                 :api-key="tinyApiKey"
                 :init="{
                     plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
@@ -17,7 +18,7 @@
                     toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
                     }"
                 v-model="cardContent" />
-                <button class="btn btn-primary mt-3" @click="saveCardContent()">Save Card Content</button>
+                <button v-if="account.admin" class="btn btn-primary mt-3" @click="saveCardContent()">Save Card Content</button>
             </div>
             <div class="card col-6 p-3" v-else>
                 <div class="card-body text-center">
@@ -68,10 +69,12 @@ export default {
         const cards = computed(() => AppState.cards)
         const currentCard = computed(() => AppState.currentCard)
         const currentGroup = computed(() => AppState.currentGroup)
+        const account = computed(() => AppState.account)
         watchEffect(() => {
             cardContent.value = currentCard.value?.content
         })
         return {
+            account,
             selectedStation,
             selectedZone,
             currentGroup,

@@ -1,6 +1,6 @@
 <template>
         <div :class="group.type == 1 ? 'ems': 'fire'" class="card cursor col-md-3 col-4 m-3 selectable">
-          <div class="dropdown ms-3 mt-3 d-flex justify-content-end">
+          <div v-if="account.admin" class="dropdown ms-3 mt-3 d-flex justify-content-end">
             <button aria-label="dropdown button" id="dropDownMenu"
               data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn btn-outline-primary">
               <i class="mdi mdi-menu"></i>
@@ -45,7 +45,9 @@ export default {
     const router = useRouter()
     const zone = computed(() => AppState.selectedZone)
     const station = computed(() => AppState.selectedStation)
+    const account = computed(() => AppState.account)
     return {
+      account,
           station,
           zone,
           router,
