@@ -42,7 +42,7 @@
                 <img class="img-fluid img-border mt-2" src="../assets/img/NFDResources.png" alt="">
             </div>
         </div>
-        
+
         <!-- ----------------------------------------Mutual Aid ----------------------- -->
         <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedMutualAid" aria-labelledby="expandedLabel">
             <div class="offcanvas-header">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- ------------------------------------------------I84 Standards ---------------- -->
         <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedI84Standards" aria-labelledby="expandedLabel">
             <div class="offcanvas-header">
@@ -83,9 +83,9 @@
                 <img class="img-fluid img-border w-100 mt-2" src="../assets/img/I84-standards.PNG" alt="">
             </div>
         </div>
-        
-        
-        
+
+
+
         <!-- ------------------------------------------Polices-------------------------- -->
         <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedPolicies" aria-labelledby="expandedLabel">
             <div class="offcanvas-header">
@@ -99,12 +99,12 @@
                 <p class="text-center text-dark">No polices Yet...</p>
             </div>
         </div>
-        
-        
-        
-        
+
+
+
+
         <!-- ------------------------------------------------Revisions----------------------------- -->
-        
+
         <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedRevisions" aria-labelledby="expandedLabel">
             <div class="offcanvas-header">
                 <h5 id="expandedLabel"><i class="fas fa-arrow-left cursor-pointer" data-bs-toggle="offcanvas"
@@ -126,25 +126,17 @@
                 </div>
                 <!-- ----------------------------------Revison Content------------------ -->
                 <div class="row">
-                    <div class="col-md-2 col-4 table-border d-flex align-items-center justify-content-center">
+                    <div class="col-md-2 col-4 d-flex align-items-center justify-content-center border">
                         <p>
-                            11/21/21
+                            1/14/23
                         </p>
                     </div>
-                    <div class="col-md-10 col-8 table-border">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus itaque molestiae ducimus earum
-                            ea iure
-                            velit, quod amet quas quidem alias possimus laudantium officiis quis dicta esse nihil assumenda?
-                            Quibusdam.
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias omnis dolorum qui impedit
-                            ducimus
-                            voluptate culpa doloremque dicta similique, praesentium quae atque id voluptatum sequi, cupiditate
-                            nam non
-                            ab pariatur.</p>
+                    <div class="col-md-10 col-8 border text-center">
+                        <p>First Launch of RapidResponse given to Nampa Fire Department for review.</p>
                     </div>
                 </div>
             </div>
-        
+
         </div>
 
     </div>

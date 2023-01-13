@@ -1,6 +1,6 @@
 <template>
-  <div class="component p-3">
-    <div class="card">
+  <div class="input">
+    <div class="card shadow">
       <div class="card-body">
     <div>
       <Timer v-if="currentGroup.type === 2"></Timer>
@@ -88,4 +88,5 @@ export default {
 
 
 <style lang="scss" scoped>
+
 </style>

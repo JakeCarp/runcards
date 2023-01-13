@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="row justify-content-between mt-2">
-            <div class="col-3 d-none d-md-block pl-0 pr-2 pt-0">
+        <div class="row justify-content-around mt-2">
+            <div class="col-md-3 d-none d-md-block pt-0">
                 <RelatedCards :cards="cards"></RelatedCards>
             </div>
-            <div v-if="currentCard" class="card col-6 p-3">
+            <div v-if="currentCard" class="card col-md-6 pt-3 mt-2 shadow">
                 <div class="card-header text-center">
                    {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span>
                 </div>
@@ -20,12 +20,12 @@
                 v-model="cardContent" />
                 <button v-if="account.admin" class="btn btn-primary mt-3" @click="saveCardContent()">Save Card Content</button>
             </div>
-            <div class="card col-6 p-3" v-else>
+            <div class="card col-md-6 pt-3 mt-2 shadow" v-else>
                 <div class="card-body text-center">
                     <h3>Create a New Run Card to begin!</h3>
                 </div>
             </div>
-            <div class="col-3 pe-0">
+            <div class="col-md-3 mt-2 ">
                 <input-bar></input-bar>
             </div>
         </div>

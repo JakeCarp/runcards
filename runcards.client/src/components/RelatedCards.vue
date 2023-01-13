@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-shrink-0 p-3 bg-white sidenav mt-2 shadow ">
+    <div class="flex-shrink-0 p-3 bg-white relatedCards mt-2 shadow ">
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none ">
             <router-link to="/groups" class="fs-5 fw-semibold">Home</router-link>
         </div>
@@ -11,12 +11,12 @@
                {{ card.title }}
             </li>
         </ul>
-        <div class="panel mb-3">
-            <button class="btn btn-primary  mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
+        <div class="panel mb-3 ">
+            <button class="btn btn-primary mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
 
-            <button v-if="account.admin" class="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
-            
+            <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
+
         </div>
     </div>
 </template>
@@ -55,9 +55,9 @@ export default {
 
 <style lang="scss" scoped>
 
-.sidenav {
-    width: 280px;
+.relatedCards {
     height: 90vh;
+    border-radius: 0.375rem;
 }
 
 .current {
@@ -68,4 +68,5 @@ export default {
     overflow-y: auto;
     height: 60vh;
 }
+
 </style>
