@@ -28,12 +28,14 @@
 
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
 import { router } from '../router'
 import { runGroupService } from '../services/RunGroupService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import RunGroupFormModal from './RunGroupFormModal.vue'
+import { AppState } from '../AppState'
 export default {
   components: { RunGroupFormModal },
     props: {
@@ -41,15 +43,23 @@ export default {
     },
   setup(props) {
     const router = useRouter()
+    const zone = computed(() => AppState.selectedZone)
+    const station = computed(() => AppState.selectedStation)
     return {
+          station,
+          zone,
           router,
-          navToCardPage() {
+      navToCardPage() {
+        if (station.value.length <= 0) {
+          Pop.toast('Please select a zone before proceeding!', 'error')
+        } else {
             runGroupService.setCurrentGroup(props.group)
             if (props.group.cards.length > 0) {
-              router.push({name: "group", params: {groupId: props.group.id, cardId: props.group.cards[0]}})
+              router.push({name: "group", params: {groupId: props.group.id, cardId: props.group.cards[0]}, query: {station: station.value, zone: zone.value}})
             } else {
-              router.push({ name: "group", params: { groupId: props.group.id } })
+              router.push({ name: "group", params: { groupId: props.group.id }, query: { station: station.value, zone: zone.value } })
               }
+            }
           },
           async removeGroup() {
             try {

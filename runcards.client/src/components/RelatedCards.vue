@@ -24,6 +24,7 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { runCardService } from '../services/RunCardService'
 import { useRouter } from 'vue-router'
+import { applyStyles } from '@popperjs/core'
 export default {
     props: {
         cards: Array,
@@ -31,12 +32,16 @@ export default {
     setup(props) {
         const router = useRouter()
         const currentCard = computed(() => AppState.currentCard)
+        const selectedStation = computed(() => AppState.selectedStation)
+        const selectedZone = computed(() => AppState.selectedZone)
         return {
+            selectedStation,
+            selectedZone,
             router,
             currentCard,
             setCurrentCard(card) {
                 runCardService.setCurrentCard(card)
-                router.push({ name: "group", params: { groupId: card.groupId, cardId: card.id } })
+                router.push({ name: "group", params: { groupId: card.groupId, cardId: card.id }, query: {station: selectedStation.value, zone: selectedZone.value} })
             }
         }
     }}

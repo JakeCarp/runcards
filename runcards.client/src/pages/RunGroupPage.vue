@@ -6,7 +6,7 @@
             </div>
             <div v-if="currentCard" class="card col-6 p-3">
                 <div class="card-header text-center">
-                   {{ currentCard.title }}
+                   {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span>
                 </div>
                 <editor
                 output-format="html"
@@ -56,6 +56,9 @@ export default {
             await runCardService.getCardsInGroup(route.params.groupId);
             if (route.params.cardId) {
                 runCardService.setCurrentCard(cards.value.find(c => c.id === route.params.cardId))
+            }
+            if (route.query.station.length > 0) {
+                runCardService.setZone(route.query.station, route.query.zone)
             }
         })
         const cardContent = ref('')

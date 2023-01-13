@@ -3,7 +3,7 @@
     <p id="time">10</p>
     <span class="dot m-2 animate__flash animate__animated" v-for="(n, index) in timeElapsed" :key="index"></span>
     <audio id="timeElapsedAlert">
-  <source src="../assets/alerts/timeElapsedAlert.mp3" type="audio/ogg">
+  <source src="../assets/alerts/dpatch.client_src_assets_alerts_timeElapsedAlert.mp3" type="audio/ogg">
   Your browser does not support the audio tag.
 </audio>
   </div>

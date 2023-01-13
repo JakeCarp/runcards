@@ -15,6 +15,7 @@ class CardService {
         try {
             const res = await api.get("/api/runcards/" + groupId)
             console.log("res", res.data)
+            console.log(AppState.currentGroup.cards)
 
             let newArr = res.data.map(c =>  new RunCard(c))
             let orderedArray = []
@@ -34,9 +35,9 @@ class CardService {
             const res = await api.post("/api/runcards", body)
             const card = new RunCard(res.data)
             const group = AppState.currentGroup
-            group.cards.unshift(card.id)
+            group.cards.push(card.id)
             await runGroupService.addCardToGroup(group, group.id)
-            AppState.cards.unshift(new RunCard(res.data))
+            AppState.cards.push(new RunCard(res.data))
             AppState.currentCard = card
         } catch (error) {
             logger.error(error)
@@ -57,6 +58,7 @@ class CardService {
     async deleteCard(id) {
         try {
             const res = await api.delete("/api/runcards/" + id)
+            console.log(res)
             Appstate.cards = AppState.cards.filter(c => c.id === id)
         } catch (error) {
            logger.error(error)

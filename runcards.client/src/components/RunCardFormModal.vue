@@ -45,15 +45,19 @@ export default {
     setup(props){
         const cardTitle = ref('')
         const currentCard = computed(() => AppState.currentCard)
+        const selectedStation = computed(() => AppState.selectedStation)
+        const selectedZone = computed(() => AppState.selectedZone)
         const router = useRouter()
         return {
+            selectedStation,
+            selectedZone,
             currentCard,
             router,
             cardTitle,
             async handleSubmit() {
                 try {
                     await runCardService.createCard({ title: cardTitle.value, content: '', groupId: props.group.id })
-                    router.push({ name: 'group', params: { groupId: props.group.id, cardId: currentCard.id}})
+                    router.push({ name: 'group', params: { groupId: props.group.id, cardId: currentCard.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
                     Modal.getOrCreateInstance(document.getElementById('cardCreateModal')).hide()
                     Pop.toast('Run Card Created!', 'success')
                 } catch (error) {

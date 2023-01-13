@@ -3,21 +3,21 @@
     <div class="card">
       <div class="card-body">
     <div>
-      <Timer></Timer>
+      <Timer v-if="currentGroup.type === 2"></Timer>
     </div>
     <div>
       <label for="radio">ASSIGNED CALL CHANNEL:</label>
-      <select name="radio">
+      <select name="radio" class="ms-2">
         <option v-for="channel in channels" :key="channel">{{channel}}</option>
       </select>
     </div>
     <div class="my-3">
       <label for="staging">LEVEL 2 STAGING AREA:</label>
-      <input type="text" name="staging" />
+      <input class="ms-2" type="text" name="staging" />
     </div>
     <div>
       <label for="radio2">LEVEL 2 STAGING CHANNEL:</label>
-      <select name="radio2">
+      <select class="ms-2" name="radio2">
         <option v-for="channel in channels" :key="channel">{{channel}}</option>
       </select>
     </div>
@@ -41,7 +41,9 @@ export default {
   components: { Timer },
   setup() {
     const channels = computed(() => AppState.channels)
+    const currentGroup = computed(() => AppState.currentGroup)
     return {
+      currentGroup,
       channels
     }
   }

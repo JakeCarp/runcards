@@ -20,6 +20,8 @@ export const AppState = reactive({
   emsGroups: [],
   fireGroups: [],
   currentGroup: {},
+  selectedStation: '',
+  selectedZone: '',
   currentCard: {},
   timeElapsed: 0
 })
