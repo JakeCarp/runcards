@@ -23,13 +23,13 @@ class RunGroupService {
   async create(body) {
     const mayday = await this.getMayday()
     const emerg = await this.getEmergency()
-    
+
     if (mayday && body.type === 3) {
       throw new Error("There is Already a Mayday Group")
     } else if (emerg && body.type === 4) {
        throw new Error("There is Already an Emergency Group")
     }
-    
+
     const newGroup = await dbContext.RunGroup.create(body)
     return newGroup
   }
@@ -41,6 +41,7 @@ class RunGroupService {
 
   async delete(id) {
     await dbContext.RunGroup.findByIdAndDelete(id)
+    await dbContext.RunCard.deleteMany({groupId: id})
     return 'Run Group Deleted'
   }
 }
