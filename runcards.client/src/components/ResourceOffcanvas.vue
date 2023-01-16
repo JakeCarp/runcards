@@ -63,8 +63,8 @@
                 </div>
                 <div class="row mutual-height ">
                     <div class="col-12 mt-5 ">
-                        <img v-if="showCanyon" class="img-fluid mb-3" src="../assets/img/CanyonCountyResources.PNG" alt="">
-                        <img v-else class="img-fluid" src="../assets/img/AdaCountyResources.PNG" alt="">
+                        <img v-if="showCanyon" class="img-fluid mb-3" src="../assets/img/CanyonCountyResources.png" alt="">
+                        <img v-else class="img-fluid" src="../assets/img/AdaCountyResources.png" alt="">
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="offcanvas-body">
                 <h1 class="text-center text-dark">I84 & HWY 55 Run Card Standards</h1>
-                <img class="img-fluid img-border w-100 mt-2" src="../assets/img/I84-standards.PNG" alt="">
+                <img class="img-fluid img-border w-100 mt-2" src="../assets/img/I84-standards.png" alt="">
             </div>
         </div>
 
