@@ -59,9 +59,11 @@ export default {
         try {
           const group = await runGroupService.getMaydayGroup()
           if (group.cards.length > 0) {
-            router.push({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            let route = router.resolve({ name: "group", params: { groupId: group.id, cardId: group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            window.open(route.href, '_blank')
           } else {
-            router.push({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            let route = router.resolve({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            window.open(route.href, '_blank')
           }
         } catch (error) {
           logger.error(error)
@@ -72,11 +74,11 @@ export default {
         try {
           const group = await runGroupService.getEmergencyGroup()
           if (group.cards.length > 0) {
-            let route = router.resolve({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
-            window.open(route.href)
+            let route = router.resolve({ name: "group", params: { groupId: group.id, cardId: group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            window.open(route.href, '_blank')
           } else {
             let route = router.resolve({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
-            window.open(route.href)
+            window.open(route.href, '_blank')
           }
         } catch (error) {
           logger.error(error)

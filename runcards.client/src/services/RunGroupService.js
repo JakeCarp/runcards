@@ -91,10 +91,7 @@ class GroupService {
             const res = await api.get("/api/rungroups/specialGroup/mayday")
             console.log(res.data)
             const group = new RunGroup(res.data)
-            AppState.currentGroup = group
-            AppState.cards = group.cards
-            AppState.currentCard = group.cards[0]
-            return new RunGroup(res.data)
+            return group
         } catch (error) {
             logger.error(error)
         }
@@ -103,11 +100,8 @@ class GroupService {
      async getEmergencyGroup() {
         try {
             const res = await api.get("/api/rungroups/specialGroup/emergency")
-            console.log(res.data)
             const group = new RunGroup(res.data)
-            AppState.currentGroup = group
-            AppState.cards = group.cards
-            AppState.currentCard = group.cards[0]
+            return group
         } catch (error) {
             logger.error(error)
         }
