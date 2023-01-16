@@ -10,7 +10,7 @@
                 <i class="mdi mdi-24px mdi-pencil coloredit selectable1"> Edit</i>
               </li>
               <li class="dropdown-item">
-                <i @click="removeGroup" title="Remove Plot" class="mdi mdi-24px mdi-trash-can selectable1 text-danger">
+                <i @click="removeGroup()" title="Remove Group" class="mdi mdi-24px mdi-trash-can selectable1 text-danger">
                   Delete</i>
               </li>
             </ul>

@@ -18,7 +18,7 @@ class RunCardService {
   }
 
   async delete(id) {
-    await dbContext.RunGroup.findByIdAndDelete(id)
+    await dbContext.RunCard.findByIdAndDelete(id)
     return 'Run Card Deleted'
   }
 }

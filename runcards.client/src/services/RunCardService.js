@@ -58,8 +58,15 @@ class CardService {
     async deleteCard(id) {
         try {
             const res = await api.delete("/api/runcards/" + id)
-            console.log(res)
-            Appstate.cards = AppState.cards.filter(c => c.id === id)
+            let group = AppState.currentGroup
+            group.cards = group.cards.filter(c => c !== id)
+            await runGroupService.removeCardFromGroup(group, group.id)
+            AppState.cards = group.cards
+            if (AppState.cards.length <= 0) {
+                AppState.currentCard = {}
+            } else {
+               AppState.currentCard = AppState.cards[0]
+            }
         } catch (error) {
            logger.error(error)
         }
@@ -67,6 +74,10 @@ class CardService {
 
     setCurrentCard(card) {
         AppState.currentCard = card
+    }
+    
+    setCards(cards) {
+        AppState.cards = cards
     }
 }
 

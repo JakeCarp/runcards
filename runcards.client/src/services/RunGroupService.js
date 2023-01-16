@@ -30,9 +30,9 @@ class GroupService {
         try {
             const res = await api.post("/api/rungroups", body)
             if(res.data.type === 1){
-              AppState.emsGroups.unshift(new RunGroup(res.data))
+              AppState.emsGroups.push(new RunGroup(res.data))
             } else {
-              AppState.fireGroups.unshift(new RunGroup(res.data))
+              AppState.fireGroups.push(new RunGroup(res.data))
             }
         } catch (error) {
             logger.error(error)
@@ -56,6 +56,16 @@ class GroupService {
     }
 
     async addCardToGroup(body, id) {
+        try {
+            const res = await api.put("/api/rungroups/" + id, body)
+            let updated = new RunGroup(res.data)
+            AppState.currentGroup = updated
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+    async removeCardFromGroup(body, id) {
         try {
             const res = await api.put("/api/rungroups/" + id, body)
             let updated = new RunGroup(res.data)

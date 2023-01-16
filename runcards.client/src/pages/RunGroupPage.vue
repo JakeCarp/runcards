@@ -5,22 +5,29 @@
                 <RelatedCards :cards="cards"></RelatedCards>
             </div>
             <div v-if="currentCard" class="card col-md-6 pt-3 mt-2 shadow">
-                <div class="card-header text-center">
-                   {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span>
+                <div  class="text-center mb-3">
+                    <h3>{{ currentGroup.title }} </h3>
+                </div>
+                <div v-if="!edit" class="card-header text-center">
+                <span><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
+                </div>
+                <div v-if="edit" class="card-header text-center">
+                    <input v-model="editCard.title" type="text"> <span><i @click="updateCard()" class="mdi mdi-check selectable"></i></span>
                 </div>
                 <editor
+                class="editor"
                 output-format="html"
                 :disabled="!account.admin"
                 :api-key="tinyApiKey"
                 :init="{
-                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
-                    menubar: 'file edit view insert format tools table help',
-                    toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
-                    }"
+                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak advlist lists nonbreaking anchor insertdatetime  wordcount help charmap quickbars emoticons',
+                menubar: 'file edit view insert format tools table help',
+                toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+                }"
                 v-model="cardContent" />
                 <button v-if="account.admin" class="btn btn-primary mt-3" @click="saveCardContent()">Save Card Content</button>
             </div>
-            <div class="card col-md-6 pt-3 mt-2 shadow" v-else>
+            <div class="card col-md-6 pt-3 my-3 shadow" v-else>
                 <div class="card-body text-center">
                     <h3>Create a New Run Card to begin!</h3>
                 </div>
@@ -50,7 +57,7 @@ import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 
 export default {
-  components: { 'editor': Editor},
+    components: { 'editor': Editor },
     setup() {
         onBeforeMount(async () => {
             await runGroupService.getGroupById(route.params.groupId)
@@ -61,7 +68,10 @@ export default {
             if (route.query.station.length > 0) {
                 runCardService.setZone(route.query.station, route.query.zone)
             }
+            console.log(currentGroup)
         })
+        const edit = ref(false)
+        const editCard = ref({})
         const cardContent = ref('')
         const route = useRoute()
         const selectedStation = computed(() => AppState.selectedStation)
@@ -71,9 +81,12 @@ export default {
         const currentGroup = computed(() => AppState.currentGroup)
         const account = computed(() => AppState.account)
         watchEffect(() => {
+            editCard.value = currentCard.value
             cardContent.value = currentCard.value?.content
         })
         return {
+            edit,
+            editCard,
             account,
             selectedStation,
             selectedZone,
@@ -84,21 +97,46 @@ export default {
             cardContent,
             async saveCardContent() {
                 try {
-                    console.log(cardContent.value)
                     let updatedCard = currentCard.value
                     updatedCard.content = cardContent.value
-                    console.log(updatedCard)
                     await runCardService.updateCard(updatedCard, updatedCard.id)
                     Pop.toast("Run Card Content Updated!", 'success')
-             } catch (error) {
+                } catch (error) {
                     logger.error(error.message)
                     Pop.toast('Something went wrong!', 'error')
-             }
+                }
+            },
+            async updateCard() {
+                try {
+                    await runCardService.updateCard(editCard.value, editCard.value.id)
+                    edit.value = !edit.value
+                    Pop.toast('Card Successfully Updated', 'success')
+                } catch (error) {
+                    logger.log(error)
+                    Pop.toast(error.message, 'error')
+                }
+
+            },
+            async removeCard() {
+                try {
+                    if (await Pop.confirm()) {
+                        await runCardService.deleteCard(currentCard.value.id)
+                        window.location.reload()
+                        Pop.toast('Run Card Removed', 'success')
+                    }
+                } catch (error) {
+                    logger.error(error)
+                    Pop.toast(error.message, 'error')
+                }
             }
         }
-    }}
+    }
+}
 </script>
 
 
 <style lang="scss" scoped>
+.editor {
+    height: 100%;
+}
 </style>

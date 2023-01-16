@@ -57,6 +57,7 @@ export default {
             async handleSubmit() {
                 try {
                     await runCardService.createCard({ title: cardTitle.value, content: '', groupId: props.group.id })
+                    cardTitle.value = ''
                     router.push({ name: 'group', params: { groupId: props.group.id, cardId: currentCard.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
                     Modal.getOrCreateInstance(document.getElementById('cardCreateModal')).hide()
                     Pop.toast('Run Card Created!', 'success')

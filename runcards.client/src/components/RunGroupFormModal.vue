@@ -79,7 +79,6 @@ export default {
                     } else {
                         modalElem = document.getElementById('aundefineda')
                     }
-                    console.log(modalElem)
                     Modal.getOrCreateInstance(modalElem).hide()
                 } catch (error) {
                     logger.error(error)

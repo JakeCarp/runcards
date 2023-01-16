@@ -72,9 +72,11 @@ export default {
         try {
           const group = await runGroupService.getEmergencyGroup()
           if (group.cards.length > 0) {
-            router.push({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            let route = router.resolve({ name: "group", params: { groupId: group.id, cardId: props.group.cards[0] }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            window.open(route.href)
           } else {
-            router.push({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            let route = router.resolve({ name: "group", params: { groupId: group.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
+            window.open(route.href)
           }
         } catch (error) {
           logger.error(error)
