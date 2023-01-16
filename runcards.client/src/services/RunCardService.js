@@ -39,6 +39,7 @@ class CardService {
             await runGroupService.addCardToGroup(group, group.id)
             AppState.cards.push(new RunCard(res.data))
             AppState.currentCard = card
+            return card
         } catch (error) {
             logger.error(error)
         }
@@ -57,16 +58,11 @@ class CardService {
 
     async deleteCard(id) {
         try {
-            const res = await api.delete("/api/runcards/" + id)
+            await api.delete("/api/runcards/" + id)
             let group = AppState.currentGroup
             group.cards = group.cards.filter(c => c !== id)
+            console.log('Post filter cards', group.cards)
             await runGroupService.removeCardFromGroup(group, group.id)
-            AppState.cards = group.cards
-            if (AppState.cards.length <= 0) {
-                AppState.currentCard = {}
-            } else {
-               AppState.currentCard = AppState.cards[0]
-            }
         } catch (error) {
            logger.error(error)
         }

@@ -12,7 +12,7 @@ export class RunGroupController extends BaseController {
       .get('', this.getAll)
       .get('/:id', this.getById)
       .get('/specialGroup/mayday', this.getMayday)
-      .get('/specialaGroup/emergency', this.getEmergency)
+      .get('/specialGroup/emergency', this.getEmergency)
       .use(CheckRole)
       .post('', this.create)
       .put('/:id', this.update)

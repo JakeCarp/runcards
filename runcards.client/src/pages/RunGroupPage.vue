@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-around mt-2">
             <div class="col-md-3 d-none d-md-block pt-0">
-                <RelatedCards :cards="cards"></RelatedCards>
+                <RelatedCards></RelatedCards>
             </div>
             <div v-if="currentCard" class="card col-md-6 pt-3 mt-2 shadow">
                 <div  class="text-center mb-3">
@@ -121,7 +121,7 @@ export default {
                 try {
                     if (await Pop.confirm()) {
                         await runCardService.deleteCard(currentCard.value.id)
-                        window.location.reload()
+                        router.push({ name: 'group', params: { groupId: currentGroup.value.id, cardId: currentCard.value.id }, query: { station: selectedStation.value, zone: selectedZone.value } })
                         Pop.toast('Run Card Removed', 'success')
                     }
                 } catch (error) {

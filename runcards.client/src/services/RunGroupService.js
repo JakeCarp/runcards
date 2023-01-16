@@ -2,6 +2,7 @@ import { AppState } from '../AppState'
 import { RunGroup } from '../models/RunGroup'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { runCardService } from './RunCardService'
 
 class GroupService {
     async getGroups() {
@@ -70,6 +71,7 @@ class GroupService {
             const res = await api.put("/api/rungroups/" + id, body)
             let updated = new RunGroup(res.data)
             AppState.currentGroup = updated
+            await runCardService.getCardsInGroup(updated.id)
         } catch (error) {
             logger.error(error)
         }

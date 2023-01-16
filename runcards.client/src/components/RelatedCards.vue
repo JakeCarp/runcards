@@ -29,16 +29,15 @@ import { runCardService } from '../services/RunCardService'
 import { useRouter } from 'vue-router'
 import { applyStyles } from '@popperjs/core'
 export default {
-    props: {
-        cards: Array,
-    },
-    setup(props) {
+    setup() {
         const router = useRouter()
         const currentCard = computed(() => AppState.currentCard)
         const selectedStation = computed(() => AppState.selectedStation)
         const selectedZone = computed(() => AppState.selectedZone)
+        const cards = computed(() => AppState.cards)
         const account = computed(() => AppState.account)
         return {
+            cards,
             account,
             selectedStation,
             selectedZone,
