@@ -68,7 +68,6 @@ export default {
             if (route.query.station.length > 0) {
                 runCardService.setZone(route.query.station, route.query.zone)
             }
-            console.log(currentGroup)
         })
         const edit = ref(false)
         const editCard = ref({})
