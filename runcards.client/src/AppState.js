@@ -15,7 +15,7 @@ export const AppState = reactive({
       deerFlat: { name: "Deerflat", zones: ['21453'], id: 7 },
       wildLife: { name: "Wildlife", zones: ['WR214', 'WR241', 'WR412'], id: 8 }
   },
-  channels: ['C1 CHARLES-1', 'C2 CHARLES-2', 'C3 CHARLES-3', 'C4 CHARLES-4', 'C5 CHARLES-5', 'C6 CHARLES-6', 'C7 CHARLES-7 MA', 'C8 CHARLES-8', 'C9 CHARLES-9', 'C10 CHARLES-10'],
+  channels: ['C1 CHARLES-1', 'C2 CHARLES-2', 'C3 CHARLES-3', 'C4 CHARLES-4', 'C5 CHARLES-5', 'C6 CHARLES-6', 'C7 CHARLES-7 MA', 'C8 CHARLES-8', 'C9 CHARLES-9', 'C10 CHARLES-10', 'C11 IE-EM-F1', 'C11 IE-EM-F2', 'C13 CHARLES-13', 'C14 CHARLES-14', 'C15 CHARLES-15', 'C16 CHARLES-16' ],
   cards: [],
   emsGroups: [],
   fireGroups: [],
