@@ -89,7 +89,6 @@ class GroupService {
     async getMaydayGroup() {
         try {
             const res = await api.get("/api/rungroups/specialGroup/mayday")
-            console.log(res.data)
             const group = new RunGroup(res.data)
             return group
         } catch (error) {

@@ -14,8 +14,6 @@ class CardService {
     async getCardsInGroup(groupId) {
         try {
             const res = await api.get("/api/runcards/" + groupId)
-            console.log("res", res.data)
-            console.log(AppState.currentGroup.cards)
 
             let newArr = res.data.map(c =>  new RunCard(c))
             let orderedArray = []
@@ -23,7 +21,6 @@ class CardService {
                 let selected = newArr.find(card => card.id === c)
                 orderedArray.push(selected)
             });
-            console.log(orderedArray)
             AppState.cards = orderedArray
             AppState.currentCard = orderedArray[0]
         } catch (error) {
@@ -61,7 +58,6 @@ class CardService {
             await api.delete("/api/runcards/" + id)
             let group = AppState.currentGroup
             group.cards = group.cards.filter(c => c !== id)
-            console.log('Post filter cards', group.cards)
             await runGroupService.removeCardFromGroup(group, group.id)
         } catch (error) {
            logger.error(error)
@@ -71,7 +67,7 @@ class CardService {
     setCurrentCard(card) {
         AppState.currentCard = card
     }
-    
+
     setCards(cards) {
         AppState.cards = cards
     }
