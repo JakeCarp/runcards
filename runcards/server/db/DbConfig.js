@@ -9,7 +9,7 @@ mongoose.connection.on('connection', () => {
 })
 
 export class DbConnection {
-  static async connect(connectionstring = 'mongodb+srv://Dispatcher:Rapid_admin123!@cluster0.hvfhpde.mongodb.net/?retryWrites=true&w=majority') {
+  static async connect(connectionstring = process.env.CONNECTION_STRING || '') {
     const status = 0
     try {
       const status = await mongoose.connect(connectionstring)
