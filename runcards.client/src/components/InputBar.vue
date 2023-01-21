@@ -5,26 +5,24 @@
     <div>
       <Timer v-if="currentGroup.type === 2"></Timer>
     </div>
-    <div>
+    <div class="text-center">
       <label for="radio">ASSIGNED CALL CHANNEL:</label>
-      <select name="radio" class="ms-2">
+      <select name="radio" class="ms-2 w-75">
         <option v-for="channel in channels" :key="channel">{{channel}}</option>
       </select>
     </div>
-    <div class="my-3">
+    <div class="my-3 text-center">
       <label for="staging">LEVEL 2 STAGING AREA:</label>
-      <input class="ms-2" type="text" name="staging" />
+      <textarea class="ms-2 w-75" type="text" name="staging" />
     </div>
-    <div>
+    <div  class="text-center">
       <label for="radio2">LEVEL 2 STAGING CHANNEL:</label>
-      <select class="ms-2" name="radio2">
+      <select class="ms-2 w-75" name="radio2">
         <option v-for="channel in channels" :key="channel">{{channel}}</option>
       </select>
     </div>
-    <div class="my-3">
+    <div class="mt-5 mb-3 d-flex justify-content-around">
       <button @click="navToMayday()" class="btn btn-danger">MAYDAY</button>
-    </div>
-    <div>
       <button @click="navToEmergency()" class="btn btn-danger">EMERGENCY</button>
     </div>
     </div>
