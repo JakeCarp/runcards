@@ -14,6 +14,8 @@ import { AppState } from "../AppState";
 export default function countdown( elementName, minutes, seconds, audioAlertName )
 {
     var element, endTime, hours, mins, msLeft, time;
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 
     function twoDigits( n )
     {
@@ -26,7 +28,7 @@ export default function countdown( elementName, minutes, seconds, audioAlertName
         if ( msLeft < 1000 ) {
           AppState.timeElapsed++
           document.getElementById(audioAlertName).play()
-            return countdown("time", 10, 0);
+            return countdown("time", 10, 0, "timeElapsedAlert");
         } else {
             time = new Date( msLeft );
             hours = time.getUTCHours();
@@ -36,7 +38,5 @@ export default function countdown( elementName, minutes, seconds, audioAlertName
         }
     }
 
-    element = document.getElementById( elementName );
-    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
     updateTimer();
 }

@@ -25,7 +25,7 @@
                 toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
                 }"
                 v-model="cardContent" />
-                <button v-if="account.admin" class="btn btn-primary mt-3" @click="saveCardContent()">Save Card Content</button>
+                <button v-if="account.admin" class="btn btn-primary my-3" @click="saveCardContent()">Save Card Content</button>
             </div>
             <div class="card col-md-6 pt-3 my-3 shadow" v-else>
                 <div class="card-body text-center">
@@ -68,6 +68,8 @@ export default {
             if (route.query.station.length > 0) {
                 runCardService.setZone(route.query.station, route.query.zone)
             }
+
+            AppState.timeElapsed = 0
         })
         const edit = ref(false)
         const editCard = ref({})
