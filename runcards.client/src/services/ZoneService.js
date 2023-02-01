@@ -7,7 +7,10 @@ class ZoneService {
     async getZones() {
         try {
             const res = await api.get("/api/zone")
-            AppState.zones = res.data.map(z => new Zone(z))
+
+            res.data.forEach(z => {
+                AppState.zones[z.stationId].push(new Zone(z))
+            })
         } catch (error) {
             logger.error(error)
         }

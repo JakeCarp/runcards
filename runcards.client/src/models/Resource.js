@@ -1,6 +1,5 @@
 export class Resource {
     constructor(data) {
-        this.name = data.name
         this.unitNumber = data.unitNumber
         this.type = data.type
         this.minStaff = data.minStaff

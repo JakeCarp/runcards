@@ -1,4 +1,9 @@
 <template>
+  <div class="row m-0">
+    <div class="col-3 d-none d-md-block sidebar pl-0 pr-2 pt-0">
+      <side-nav></side-nav>
+    </div>
+  </div>
 <div class="container">
   <div class="row">
     <div v-if="account.admin" class="col-md-10 offset-md-2 text-end mt-2">
@@ -62,9 +67,10 @@ import { runGroupService } from '../services/RunGroupService'
 import Pop from '../utils/Pop'
 import RunGroupFormModal from '../components/RunGroupFormModal.vue'
 import { runCardService } from '../services/RunCardService'
+import SideNav from '../components/SideNav.vue'
 
 export default {
-  components: { RunGroupFormModal },
+  components: { RunGroupFormModal, SideNav },
     setup() {
       onMounted(async () => {
         await runGroupService.getGroups()

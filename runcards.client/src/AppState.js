@@ -6,7 +6,7 @@ export const AppState = reactive({
   /**@type {import('./models/Account.js').Account} */
   account: {},
   stations: [],
-  zones: [],
+  zones: {},
   channels: [],
   resources: [],
   cards: [],

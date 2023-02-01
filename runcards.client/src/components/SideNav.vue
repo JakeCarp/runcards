@@ -11,7 +11,7 @@
             </button>
             <div class="collapse" :id="'station' + station.id">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li v-for="zone in station.zones" :key="zone"><a @click="setZone(station.name, zone)" class="link-dark rounded">{{zone}}</a></li>
+                <li v-for="zone in zones[station.id]" :key="zone.id"><a @click="setZone(station, zone)" class="link-dark rounded">{{zone}}</a></li>
               </ul>
             </div>
           </li>
@@ -38,6 +38,7 @@ import pop from '../utils/Pop'
 export default {
   setup() {
     const stations = computed(() => AppState.stations)
+    const zones = computed(() => AppState.zones)
     return {
       setZone(station, zone) {
         runCardService.setZone(station, zone)
