@@ -3,7 +3,7 @@ import { dbContext } from "../db/DbContext";
 
 class ResourceService {
     async getResources() {
-        const resources = await dbContext.Resource.find()
+        const resources = await dbContext.Resource.find().populate('station')
         return resources
     }
     async createResource(body) {

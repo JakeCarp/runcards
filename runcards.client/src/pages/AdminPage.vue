@@ -21,7 +21,7 @@
                         <th scope="row">{{channel.name}}</th>
                         <td>
                             <button class="btn"><i class="mdi mdi-pencil selectable"></i></button>
-                            <button class="btn"><i class="mdi mdi-trash-can text-danger selectable"></i></button></td>
+                            <button class="btn" @click="openSimpleObjectModal(channel)"><i class="mdi mdi-trash-can text-danger selectable"></i></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -92,8 +92,10 @@
 <script>
 import { computed, ref } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { Modal } from 'bootstrap'
 export default {
     setup() {
+        const selectedObj = ref({})
         const selectedTab = ref('')
         const account = computed(() => AppState.account)
         const channels = computed(() => AppState.channels)
@@ -101,6 +103,7 @@ export default {
         const stations = computed(() => AppState.stations)
         const resources = computed(() => AppState.resources)
         return {
+            selectedObj,
             channels,
             zones,
             stations,
@@ -115,6 +118,16 @@ export default {
                 } else {
                     document.getElementById('RM').classList.remove('selected')
                     document.getElementById(`${str}`).classList.add('selected')
+                }
+            },
+            openSimpleObjectModal(obj) {
+                if (!obj) {
+                    let modal = Modal.getOrCreateInstance('SimpleFormModal')
+                   modal.open()
+                } else {
+                    selectedObj.value = obj
+                    let modal = Modal.getOrCreateInstance('SimpleFormModal')
+                    modal.open()
                 }
             }
         }
