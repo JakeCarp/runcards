@@ -23,5 +23,6 @@ export const AppState = reactive({
   selectedStation: '',
   selectedZone: '',
   currentCard: {},
-  timeElapsed: 0
+  timeElapsed: 0,
+  timeString: "10:00"
 })

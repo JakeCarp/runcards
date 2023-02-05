@@ -1,42 +1,21 @@
 import { AppState } from "../AppState";
+import Timer from "tiny-timer"
 
-/**
- *
- * @param {string} elementName
- * id of the text element in html where the time will be injected
- * @param {number} minutes
- * desired minutes for timer to begin at
- * @param {number} seconds
- * desired seconds for timer to begin at
- * * @param {string} audioAlertName
- * id of the audio element in html we want to play on timer elapse
- */
-export default function countdown( elementName, minutes, seconds, audioAlertName )
+export default function countdown()
 {
-    var element, endTime, hours, mins, msLeft, time;
-    element = document.getElementById( elementName );
-    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    const timer = new Timer({ interval: 1000, stopwatch: false });
+    timer.on('tick', (ms) => AppState.timeString = convertMsToTime(ms));
+    timer.on('done', () => {
+      document.getElementById("timeElapsedAlert").play();
+      AppState.timeElapsed++;
+      timer.start(600000);
+    });
 
-    function twoDigits( n )
-    {
-        return (n <= 9 ? "0" + n : n);
-    }
-
-    function updateTimer()
-    {
-        msLeft = endTime - (+new Date);
-        if ( msLeft < 1000 ) {
-          AppState.timeElapsed++
-          document.getElementById(audioAlertName).play()
-            return countdown("time", 10, 0, "timeElapsedAlert");
-        } else {
-            time = new Date( msLeft );
-            hours = time.getUTCHours();
-            mins = time.getUTCMinutes();
-            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-        }
-    }
-
-    updateTimer();
+    timer.start(60000); // run for 10 mins
+}
+function convertMsToTime(milliseconds){
+  let seconds = Math.floor((milliseconds / 1000) % 60);
+  if(seconds <= 9 ? seconds = "0" + seconds : seconds);
+  let minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+    return `${minutes}:${seconds}`;
 }

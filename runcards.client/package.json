@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.0",
     "socket.io-client": "^4.5.1",
     "sweetalert2": "^11.4.26",
+    "tiny-timer": "^1.6.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.4",
     "yarn": "^1.22.19"
