@@ -23,6 +23,14 @@ export const AppState = reactive({
   selectedStation: '',
   selectedZone: '',
   currentCard: {},
+  resources: {
+    station1: [],
+    station2: [],
+    station3: [],
+    station4: [],
+    station5: [],
+    admin: []
+  },
   timeElapsed: 0,
   timeString: "10:00"
 })

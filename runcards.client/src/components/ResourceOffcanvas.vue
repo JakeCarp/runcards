@@ -39,7 +39,61 @@
             </div>
             <div class="offcanvas-body">
                 <h1 class="text-center text-dark">Nampa Fire Department Resouce List</h1>
-                <img class="img-fluid img-border mt-2" src="../assets/img/NFDResources.png" alt="">
+                <table class="table text-center border">
+                    <thead>
+                      <tr>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Min Staff</th>
+                        <th scope="col">24/7 Staffed</th>
+                         <th scope="col">Station</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="resource in station1Resources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="station1">Station 1</td>
+                      </tr>
+                      <tr v-for="resource in station2Resources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="station2">Station 2</td>
+                      </tr>
+                      <tr v-for="resource in station3Resources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="station3">Station 3</td>
+                      </tr>
+                      <tr v-for="resource in station4Resources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="station4">Station 4</td>
+                      </tr>
+                      <tr v-for="resource in station5Resources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="station5">Station 5</td>
+                      </tr>
+                      <tr v-for="resource in adminResources" :key="resource._id">
+                        <th scope="row">{{resource.unitNumber}}</th>
+                        <td>{{resource.type}}</td>
+                        <td>{{resource.minStaff}}</td>
+                        <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
+                         <td class="admin">admin</td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
         </div>
 
@@ -145,16 +199,50 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import { computed, onMounted } from "@vue/runtime-core"
+import { resourceService } from "../services/ResourceService"
+import { AppState } from "../AppState"
 export default {
     setup() {
+      onMounted(() => {
+        resourceService.getDepartmentResources()
+      })
         const showCanyon = ref(true)
         return {
-            showCanyon
+            showCanyon,
+            station1Resources: computed(() => AppState.resources["station1"]),
+            station2Resources: computed(() => AppState.resources["station2"]),
+            station3Resources: computed(() => AppState.resources["station3"]),
+            station4Resources: computed(() => AppState.resources["station4"]),
+            station5Resources: computed(() => AppState.resources["station5"]),
+            adminResouces: computed(() => AppState.resources["admin"]),
         }
     }}
 </script>
 
 
 <style lang="scss" scoped>
+.station1{
+  background-color: yellow;
+}
 
+.station2{
+  background-color: red;
+}
+
+.station3{
+  background-color: blue;
+}
+
+.station4{
+  background-color: green;
+}
+
+.station5{
+  background-color: blanchedalmond;
+}
+
+.admin{
+  background-color: navy;
+}
 </style>
