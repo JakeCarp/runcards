@@ -11,7 +11,7 @@ export default function countdown()
       timer.start(600000);
     });
 
-    timer.start(60000); // run for 10 mins
+    timer.start(600000); // run for 10 mins
 }
 function convertMsToTime(milliseconds){
   let seconds = Math.floor((milliseconds / 1000) % 60);
