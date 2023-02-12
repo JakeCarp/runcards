@@ -8,87 +8,87 @@ class ResourceService{
   async getDepartmentResources(){
     console.log("resourceService");
     try {
-      // const res = await api.get("/api/resouce")
+      const res = await api.get("/api/resouce")
 
-      const res = {
-        data: [
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : false,
-          agency : 'NFD Resource',
-          station: {
-            name: "station 1"
-          }
-        },
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : false,
-          agency : 'NFD Resource',
-          station: {
-            name: "station 4"
-          }
-        },
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : false,
-          agency : 'NFD Resource',
-          station: {
-            name: "station 3"
-          }
-        },
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : false,
-          agency : 'NFD Resource',
-          station: {
-            name: "station 5"
-          }
-        },
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : false,
-          agency : 'NFD Resource',
-          station: {
-            name: "station 2"
-          }
-        },
-        {
-          id: 1,
-          unitNumber : "E1",
-          type : "Paramedic Engine",
-          minStaff : 3,
-          alwaysStaffed : true,
-          stationId : 1,
-          admin : true,
-          agency : 'NFD Resource',
-        }
-      ]
-    }
+    //   const res = {
+    //     data: [
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : false,
+    //       agency : 'NFD Resource',
+    //       station: {
+    //         name: "station 1"
+    //       }
+    //     },
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : false,
+    //       agency : 'NFD Resource',
+    //       station: {
+    //         name: "station 4"
+    //       }
+    //     },
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : false,
+    //       agency : 'NFD Resource',
+    //       station: {
+    //         name: "station 3"
+    //       }
+    //     },
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : false,
+    //       agency : 'NFD Resource',
+    //       station: {
+    //         name: "station 5"
+    //       }
+    //     },
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : false,
+    //       agency : 'NFD Resource',
+    //       station: {
+    //         name: "station 2"
+    //       }
+    //     },
+    //     {
+    //       id: 1,
+    //       unitNumber : "E1",
+    //       type : "Paramedic Engine",
+    //       minStaff : 3,
+    //       alwaysStaffed : true,
+    //       stationId : 1,
+    //       admin : true,
+    //       agency : 'NFD Resource',
+    //     }
+    //   ]
+    // }
       res.data.forEach(r => {
         new Resouce(r);
         if(r.admin){
