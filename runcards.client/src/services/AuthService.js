@@ -4,6 +4,8 @@ import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
+import { resourceGuidelineService } from "./ResourceGuidelineService"
+import { resourceService } from "./ResourceService"
 import { socketService } from './SocketService'
 
 export const AuthService = initialize({
@@ -25,6 +27,8 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   api.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
   await accountService.getAccount()
+  await resourceService.getDepartmentResources()
+  await resourceGuidelineService.getResourceGuidelines()
   socketService.authenticate(AuthService.bearer)
 })
 

@@ -32,5 +32,7 @@ export const AppState = reactive({
     admin: []
   },
   timeElapsed: 0,
-  displayedResource: "station1"
+  displayedResource: "station1",
+  resourceGuidelines: [],
+  resourceGuidelineLists: []
 })

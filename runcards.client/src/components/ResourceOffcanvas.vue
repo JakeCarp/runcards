@@ -180,11 +180,37 @@
             </div>
             <div class="offcanvas-body container-fluid text-dark">
                 <h1 class="text-center">Response Guidelines</h1>
+             <ul class="nav nav-tabs text-dark mt-4">
+  <li class="nav-item" v-for="r in resourceGuidelines" :key="r._id">
+    <a class="nav-link" href="#">{{r.title}}</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addResourceGuideline">Add +</a>
+  </li>
+</ul>
             </div>
-
-
         </div>
 
+        <!-- Modal -->
+<div class="modal fade" id="addResourceGuideline" tabindex="-1" aria-labelledby="addResourceGuideline" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Resource Guideline Zone</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form @submit.prevent="createGuideline()">
+      <div class="modal-body text-center">
+        <input placeholder="new station/zone title" class="w-75" type="text" v-model="newGuideline.title" required>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Create</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
     </div>
 </template>
 
@@ -193,15 +219,18 @@
 import { ref } from '@vue/reactivity'
 import { computed, onMounted } from "@vue/runtime-core"
 import { resourceService } from "../services/ResourceService"
+import { resourceGuidelineService } from "../services/ResourceGuidelineService"
 import { AppState } from "../AppState"
+import { Modal } from 'bootstrap'
 export default {
     setup() {
       onMounted(() => {
-        resourceService.getDepartmentResources()
       })
         const showCanyon = ref(true)
+         const newGuideline = ref({})
         return {
             showCanyon,
+            newGuideline,
             station1Resources: computed(() => AppState.resources["station1"]),
             station2Resources: computed(() => AppState.resources["station2"]),
             station3Resources: computed(() => AppState.resources["station3"]),
@@ -209,8 +238,14 @@ export default {
             station5Resources: computed(() => AppState.resources["station5"]),
             adminResources: computed(() => AppState.resources["admin"]),
             displayedResource: computed(() => AppState.displayedResource),
+            resourceGuidelines: computed(() => AppState.resourceGuidelines),
             renderResources(name){
               AppState.displayedResource = name
+            },
+            async createGuideline(){
+              await resourceGuidelineService.createGuideline(newGuideline.value)
+              Modal.getOrCreateInstance(document.getElementById('addResourceGuideline')).hide()
+              newGuideline.value.title = null
             }
         }
     }}
