@@ -21,10 +21,7 @@
                             Standards</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#expandedPolicies">Policies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#expandedRevisions">Revisions</a>
+                        <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#expandedResourceGuidelines">Resource Guidelines</a>
                     </li>
                 </ul>
             </div>
@@ -172,58 +169,19 @@
             </div>
         </div>
 
+        <!-- --------------------------------------Response Guidelines----------------------------- -->
 
-
-        <!-- ------------------------------------------Polices-------------------------- -->
-        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedPolicies" aria-labelledby="expandedLabel">
+        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedResourceGuidelines" aria-labelledby="expandedLabel">
             <div class="offcanvas-header">
                 <h5 id="expandedLabel"><i class="fas fa-arrow-left cursor-pointer" data-bs-toggle="offcanvas"
                         data-bs-target="#information"></i></h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    data-bs-target="#expandedPolicies" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <h1 class="text-center text-dark">Policies</h1>
-                <p class="text-center text-dark">No polices Yet...</p>
-            </div>
-        </div>
-
-
-
-
-        <!-- ------------------------------------------------Revisions----------------------------- -->
-
-        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="expandedRevisions" aria-labelledby="expandedLabel">
-            <div class="offcanvas-header">
-                <h5 id="expandedLabel"><i class="fas fa-arrow-left cursor-pointer" data-bs-toggle="offcanvas"
-                        data-bs-target="#information"></i></h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    data-bs-target="#expandedRevisions" aria-label="Close"></button>
+                    data-bs-target="#expandedResourceGuidelines" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body container-fluid text-dark">
-                <h1 class="text-center">Revisions</h1>
-                <div class="row text-center mt-4">
-                    <div class="col-md-2 col-4 mt-4">
-                        <p>Date</p>
-                    </div>
-                    <div class="col-md-10 col-8 mt-4">
-                        <p>
-                            Revision Notes
-                        </p>
-                    </div>
-                </div>
-                <!-- ----------------------------------Revison Content------------------ -->
-                <div class="row">
-                    <div class="col-md-2 col-4 d-flex align-items-center justify-content-center border">
-                        <p>
-                            1/14/23
-                        </p>
-                    </div>
-                    <div class="col-md-10 col-8 border text-center">
-                        <p>First Launch of RapidResponse given to Nampa Fire Department for review.</p>
-                    </div>
-                </div>
+                <h1 class="text-center">Response Guidelines</h1>
             </div>
+
 
         </div>
 
