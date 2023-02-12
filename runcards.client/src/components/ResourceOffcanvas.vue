@@ -39,7 +39,27 @@
             </div>
             <div class="offcanvas-body">
                 <h1 class="text-center text-dark">Nampa Fire Department Resouce List</h1>
-                <table class="table text-center border">
+                <ul class="nav nav-tabs text-dark mt-4">
+  <li class="nav-item">
+    <a class="nav-link" href="#" @click="renderResources('station1')">Station 1</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" @click="renderResources('station2')">Station 2</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" @click="renderResources('station3')">Station 3</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" @click="renderResources('station4')">Station 4</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" @click="renderResources('station5')">Station 5</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" @click="renderResources('admin')">Admin</a>
+  </li>
+</ul>
+                <table class="table text-center border mt-4">
                     <thead>
                       <tr>
                         <th scope="col">Unit</th>
@@ -49,7 +69,7 @@
                          <th scope="col">Station</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-if="displayedResource === 'station1'">
                       <tr v-for="resource in station1Resources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -57,6 +77,8 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="station1">Station 1</td>
                       </tr>
+                    </tbody>
+                      <tbody v-if="displayedResource === 'station2'">
                       <tr v-for="resource in station2Resources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -64,6 +86,9 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="station2">Station 2</td>
                       </tr>
+                      </tbody>
+
+                      <tbody  v-if="displayedResource === 'station3'">
                       <tr v-for="resource in station3Resources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -71,6 +96,9 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="station3">Station 3</td>
                       </tr>
+                      </tbody>
+
+                      <tbody v-if="displayedResource === 'station4'">
                       <tr v-for="resource in station4Resources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -78,6 +106,9 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="station4">Station 4</td>
                       </tr>
+                      </tbody>
+
+                      <tbody v-if="displayedResource === 'station5'">
                       <tr v-for="resource in station5Resources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -85,6 +116,9 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="station5">Station 5</td>
                       </tr>
+                      </tbody>
+
+                      <tbody v-if="displayedResource === 'admin'">
                       <tr v-for="resource in adminResources" :key="resource._id">
                         <th scope="row">{{resource.unitNumber}}</th>
                         <td>{{resource.type}}</td>
@@ -92,7 +126,7 @@
                         <td>{{resource.alwaysStaffed ? "Yes" : "No"}}</td>
                          <td class="admin">admin</td>
                       </tr>
-                    </tbody>
+                      </tbody>
                   </table>
             </div>
         </div>
@@ -215,34 +249,18 @@ export default {
             station3Resources: computed(() => AppState.resources["station3"]),
             station4Resources: computed(() => AppState.resources["station4"]),
             station5Resources: computed(() => AppState.resources["station5"]),
-            adminResouces: computed(() => AppState.resources["admin"]),
+            adminResources: computed(() => AppState.resources["admin"]),
+            displayedResource: computed(() => AppState.displayedResource),
+            renderResources(name){
+              AppState.displayedResource = name
+            }
         }
     }}
 </script>
 
 
 <style lang="scss" scoped>
-.station1{
-  background-color: yellow;
-}
-
-.station2{
-  background-color: red;
-}
-
-.station3{
-  background-color: blue;
-}
-
-.station4{
-  background-color: green;
-}
-
-.station5{
-  background-color: blanchedalmond;
-}
-
-.admin{
-  background-color: navy;
+.nav-link{
+  color: black;
 }
 </style>

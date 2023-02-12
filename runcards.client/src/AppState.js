@@ -32,5 +32,5 @@ export const AppState = reactive({
     admin: []
   },
   timeElapsed: 0,
-  timeString: "10:00"
+  displayedResource: "station1"
 })
