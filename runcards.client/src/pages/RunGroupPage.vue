@@ -9,12 +9,12 @@
                     <h3>{{ currentGroup.title }} </h3>
                 </div>
                 <div v-if="!edit" class="card-header text-center">
-                <span><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
+                <span><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation.name }} - Zone {{ selectedZone.name }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
                 </div>
                 <div v-if="edit" class="card-header text-center">
                     <input v-model="editCard.title" type="text"> <span><i @click="updateCard()" class="mdi mdi-check selectable"></i></span>
                 </div>
-                <editor
+                <!-- <editor
                 class="editor"
                 output-format="html"
                 :disabled="!account.admin"
@@ -24,7 +24,8 @@
                 menubar: 'file edit view insert format tools table help',
                 toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
                 }"
-                v-model="cardContent" />
+                v-model="cardContent" /> -->
+                <QuillEditor class="quill" :content="cardContent"  v-model:content="cardContent" toolbar="full" theme="snow" content-type="html"></QuillEditor>
                 <button v-if="account.admin" class="btn btn-primary my-3" @click="saveCardContent()">Save Card Content</button>
             </div>
             <div class="card col-md-6 pt-3 my-3 shadow" v-else>
@@ -42,8 +43,10 @@
 
 
 <script>
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import Editor from '@tinymce/tinymce-vue'
-import { computed, onBeforeMount, ref, watch, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, onMounted, ref, watch, watchEffect } from '@vue/runtime-core'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
 import { runCardService } from '../services/RunCardService'
@@ -55,19 +58,23 @@ import RunCardFormModal from '../components/RunCardFormModal.vue'
 import { runGroupService } from '../services/RunGroupService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { stationService } from '../services/StationService';
+import { zoneService } from '../services/ZoneService';
 
 export default {
-    components: { 'editor': Editor },
+    components: {
+        'editor': Editor,
+    QuillEditor},
     setup() {
         onBeforeMount(async () => {
             await runGroupService.getGroupById(route.params.groupId)
             await runCardService.getCardsInGroup(route.params.groupId);
+            await stationService.getStations()
+            await zoneService.getZones()
             if (route.params.cardId) {
                 runCardService.setCurrentCard(cards.value.find(c => c.id === route.params.cardId))
             }
-            if (route.query.station.length > 0) {
-                runCardService.setZone(route.query.station, route.query.zone)
-            }
+             runCardService.setZone(route.params.stationId, route.params.zoneId)
 
             AppState.timeElapsed = 0
         })
@@ -85,6 +92,12 @@ export default {
             editCard.value = currentCard.value
             cardContent.value = currentCard.value?.content
         })
+        watchEffect(() => {
+            if (account.value.admin && account.value.admin === false) {
+                console.log(document.getElementsByClassName('ql-toolbar'))
+                document.getElementsByClassName('ql-toolbar')[0].classList.add('d-none')
+            }
+       })
         return {
             edit,
             editCard,
@@ -100,6 +113,7 @@ export default {
                 try {
                     let updatedCard = currentCard.value
                     updatedCard.content = cardContent.value
+                    console.log(updatedCard.content)
                     await runCardService.updateCard(updatedCard, updatedCard.id)
                     Pop.toast("Run Card Content Updated!", 'success')
                 } catch (error) {
@@ -139,5 +153,9 @@ export default {
 <style lang="scss" scoped>
 .editor {
     height: 100%;
+}
+
+.quill {
+    overflow-y: scroll;
 }
 </style>

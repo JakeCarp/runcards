@@ -49,14 +49,16 @@ export default {
           zone,
           router,
       navToCardPage() {
+        console.log(station)
+        console.log(zone)
         if (station.value.length <= 0) {
           Pop.toast('Please select a zone before proceeding!', 'error')
         } else {
             runGroupService.setCurrentGroup(props.group)
             if (props.group.cards.length > 0) {
-              router.push({name: "group", params: {groupId: props.group.id, cardId: props.group.cards[0]}, query: {station: station.value, zone: zone.value}})
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id, cardId: props.group.cards[0]}})
             } else {
-              router.push({ name: "group", params: { groupId: props.group.id }, query: { station: station.value, zone: zone.value } })
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id} })
               }
             }
           },

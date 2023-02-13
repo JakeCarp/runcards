@@ -11,7 +11,7 @@
             </button>
             <div class="collapse" :id="'station' + station.id">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li v-for="zone in zones[station.id]" :key="zone.id"><a @click="setZone(station, zone)" class="link-dark rounded">{{zone.name}}</a></li>
+                <li v-for="zone in zones[station.id]" :key="zone.id"><a @click="setZone(station.id, zone.id)" class="link-dark rounded">{{zone.name}}</a></li>
               </ul>
             </div>
           </li>
