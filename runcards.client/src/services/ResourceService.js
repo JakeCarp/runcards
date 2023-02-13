@@ -22,9 +22,9 @@ class ResourceService {
         }
     }
     
-    async updateResource(body, id) {
+    async updateResource(body) {
         try {
-            const res = await api.put("/api/resource/" + id, body)
+            const res = await api.put("/api/resource/" + body.id, body)
             let updated = new Resource(res.data)
             let index = AppState.resources.findIndex(r => r.id === updated.id)
             AppState.resources.splice(index, 1, updated)
@@ -36,7 +36,7 @@ class ResourceService {
     async deleteResource(id) {
         try {
             await api.delete("/api/resource/" + id)
-            AppState.resources.filter(r => r.id !== id)
+           AppState.resources = AppState.resources.filter(r => r.id !== id)
         } catch (error) {
             logger.error(error)
         }

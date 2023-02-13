@@ -11,12 +11,13 @@ class StationService {
         return newStation
     }
     async updateStation(id, body) {
-        const updated = await dbContext.Station.findByIdAndUpdate(id, body)
+        const updated = await dbContext.Station.findByIdAndUpdate(id, body, {new: true})
         return updated
     }
     
     async deleteStation(id) {
         await dbContext.Station.findByIdAndDelete(id)
+        await dbContext.Zone.deleteMany({stationId: id})
         return 'Station Deleted'
     }
 }

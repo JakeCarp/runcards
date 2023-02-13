@@ -10,6 +10,7 @@ export const AppState = reactive({
   channels: [],
   resources: [],
   cards: [],
+  I84Groups: [],
   emsGroups: [],
   fireGroups: [],
   currentGroup: {},

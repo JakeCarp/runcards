@@ -6,7 +6,7 @@ import { CheckRole } from "../utils/CheckRole";
 
 export class ZoneController extends BaseController {
     constructor() {
-        super('zone')
+        super('api/zone')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getZones)
@@ -45,7 +45,7 @@ export class ZoneController extends BaseController {
 
     async deleteZone(req, res, next) {
         try {
-            const msg = await zoneService.deleteZone(req.parmas.id)
+            const msg = await zoneService.deleteZone(req.params.id)
             res.send(msg)
         } catch (error) {
             next(error)

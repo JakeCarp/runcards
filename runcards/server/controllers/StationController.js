@@ -6,7 +6,7 @@ import { CheckRole } from "../utils/CheckRole";
 
 export class StationController extends BaseController {
     constructor() {
-        super('station')
+        super('api/station')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getStations)

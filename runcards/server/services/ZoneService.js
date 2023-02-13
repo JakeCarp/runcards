@@ -11,7 +11,7 @@ class ZoneService {
         return zone
     }
     async updateZone(id, body) {
-        const zone = await dbContext.Zone.findByIdAndUpdate(id, body)
+        const zone = await dbContext.Zone.findByIdAndUpdate(id, body, {new: true})
         return zone
     }
     async deleteZone(id) {

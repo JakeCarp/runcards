@@ -1,5 +1,5 @@
 <template>
-      <div class="flex-shrink-0 p-3 bg-white sidenav mt-2 shadow ">
+      <div class="flex-shrink-0 p-3  sidenav mt-2 shadow ">
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
           <span class="fs-5 fw-semibold">NFD Stations</span>
         </div>
@@ -11,7 +11,7 @@
             </button>
             <div class="collapse" :id="'station' + station.id">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li v-for="zone in zones[station.id]" :key="zone.id"><a @click="setZone(station, zone)" class="link-dark rounded">{{zone}}</a></li>
+                <li v-for="zone in zones[station.id]" :key="zone.id"><a @click="setZone(station, zone)" class="link-dark rounded">{{zone.name}}</a></li>
               </ul>
             </div>
           </li>
@@ -37,7 +37,7 @@ import { AuthService } from "../services/AuthService";
 import pop from '../utils/Pop'
 export default {
   setup() {
-    const stations = computed(() => AppState.stations)
+    const stations = computed(() => AppState.stations.filter(s => s.name !== 'Administration'))
     const zones = computed(() => AppState.zones)
     return {
       setZone(station, zone) {
@@ -48,7 +48,8 @@ export default {
              AuthService.logout({ returnTo: window.location.origin });
           }
         },
-      stations
+      stations,
+      zones
       }
     }
   }

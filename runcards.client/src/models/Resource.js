@@ -6,7 +6,6 @@ export class Resource {
         this.alwaysStaffed = data.alwaysStaffed
         this.stationId = data.stationId
         this.admin = data.admin
-        this.agency = data.agency
         this.id = data._id
     }
 }

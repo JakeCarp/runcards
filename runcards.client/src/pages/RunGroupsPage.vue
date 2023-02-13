@@ -17,11 +17,11 @@
     </div>
     
     <div v-if="selectedStation" class="col-md-10 offset-md-2 text-center">
-      <h1>Station: {{selectedStation}}</h1>
+      <h1>Station: {{selectedStation.name}}</h1>
     </div>
     
     <div v-if="selectedZone" class="col-md-10 offset-md-2 text-center mb-4">
-      <h2>Zone: {{selectedZone}}</h2>
+      <h2>Zone: {{selectedZone.name}}</h2>
     </div>
   </div>
   <div v-if="selectedZone" class="row">
@@ -44,11 +44,25 @@
         Fire Cards:
       </h3>
     </div>
+
     
     <div v-if="selectedZone" class="col-md-9 offset-md-3">
       <div class="row">
         <RunGroup v-for="group in fireGroups" :key="group.id" :group="group"></RunGroup>
         
+      </div>
+    </div>
+
+    <div v-if="selectedZone" class="col-md-10 offset-md-2  text-center">
+      <h3>
+        I84 and HWY 55:
+      </h3>
+    </div>
+
+    <div v-if="selectedZone" class="col-md-9 offset-md-3">
+      <div class="row">
+        <RunGroup v-for="group in I84Groups" :key="group.id" :group="group"></RunGroup>
+    
       </div>
     </div>
     
@@ -68,21 +82,27 @@ import Pop from '../utils/Pop'
 import RunGroupFormModal from '../components/RunGroupFormModal.vue'
 import { runCardService } from '../services/RunCardService'
 import SideNav from '../components/SideNav.vue'
+import { stationService } from '../services/StationService'
+import { zoneService } from '../services/ZoneService'
 
 export default {
   components: { RunGroupFormModal, SideNav },
     setup() {
       onMounted(async () => {
+        await stationService.getStations()
+        await zoneService.getZones()
         await runGroupService.getGroups()
         runCardService.setCurrentCard({})
         runCardService.setCards([])
-        })
+      })
         const selectedStation = computed(() => AppState.selectedStation)
         const selectedZone = computed(() => AppState.selectedZone)
         const emsGroups = computed(() => AppState.emsGroups)
-        const fireGroups = computed(() => AppState.fireGroups)
+      const fireGroups = computed(() => AppState.fireGroups)
+        const I84Groups = computed(() => AppState.I84Groups)
         const account = computed(() => AppState.account)
       return {
+            I84Groups,
             account,
             selectedStation,
             selectedZone,

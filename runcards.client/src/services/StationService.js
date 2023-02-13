@@ -1,7 +1,7 @@
-const { AppState } = require("../AppState");
-const { Station } = require("../models/Station");
-const { logger } = require("../utils/Logger");
-const { api } = require("./AxiosService");
+import { AppState } from "../AppState"
+import { Station } from "../models/Station"
+import { logger } from "../utils/Logger"
+import { api } from "./AxiosService"
 
 
 class StationService {
@@ -23,12 +23,14 @@ class StationService {
         }
     }
     
-    async updateStation(body, id) {
+    async updateStation(body) {
         try {
-            const res = await api.put("/api/station/" + id, body)
+            const res = await api.put("/api/station/" + body.id, body)
             let updated = new Station(res.data)
+            console.log(updated)
             let index = AppState.stations.findIndex(s => s.id === updated.id)
             AppState.stations.splice(index, 1, updated)
+            console.log(AppState.stations)
         } catch (error) {
             logger.error(error)
         }
@@ -37,7 +39,7 @@ class StationService {
     async deleteStation(id) {
         try {
             await api.delete("/api/station/" + id)
-            AppState.stations.filter(s => s.id !== id)
+            AppState.stations = AppState.stations.filter(s => s.id !== id)
         } catch (error) {
             logger.error(error)
         }

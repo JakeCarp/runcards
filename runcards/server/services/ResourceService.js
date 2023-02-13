@@ -11,7 +11,7 @@ class ResourceService {
         return resource
     }
     async updateResource(id, body) {
-        const resource = await dbContext.Resource.findByIdAndUpdate(id, body)
+        const resource = await dbContext.Resource.findByIdAndUpdate(id, body, {new: true})
         return resource
     }
     async deleteResource(id) {

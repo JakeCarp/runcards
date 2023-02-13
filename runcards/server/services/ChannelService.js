@@ -10,7 +10,7 @@ class ChannelService {
         return newChannel
     }
     async updatedChannel(id, body) {
-        const updatedChannel = await dbContext.Channel.findByIdAndUpdate(id, body)
+        const updatedChannel = await dbContext.Channel.findByIdAndUpdate(id, body, {new: true})
         return updatedChannel
     }
     async deleteChannel(id) {

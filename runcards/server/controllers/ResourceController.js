@@ -5,7 +5,7 @@ import { CheckRole } from "../utils/CheckRole";
 
 export class ResourceController extends BaseController {
     constructor() {
-        super('resource')
+        super('api/resource')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getResources)

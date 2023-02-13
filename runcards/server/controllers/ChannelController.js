@@ -5,7 +5,7 @@ import { CheckRole } from "../utils/CheckRole";
 
 export class ChannelController extends BaseController {
     constructor() {
-        super('channel')
+        super('api/channel')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getChannels)
