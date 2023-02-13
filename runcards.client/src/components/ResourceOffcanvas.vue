@@ -184,14 +184,52 @@
   <li class="nav-item" v-for="r in resourceGuidelines" :key="r._id">
     <a class="nav-link" href="#">{{r.title}}</a>
   </li>
-    <li class="nav-item">
+    <li class="nav-item" v-if="account.admin">
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addResourceGuideline">Add +</a>
   </li>
 </ul>
+<div class="row">
+  <div class="col-12 text-end mt-3">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addResourceGuidelineList" v-if="account.admin">Add Resource Guideline</button>
+  </div>
+  <div class="col-12">
+    <h5>Engine 1</h5>
+    <ul>
+      <li>All first out EMS responses</li>
+      <li>All structure, vehicle, and dumpster fires</li>
+      <li>First out MVA's in Sta. 1 district</li>
+      <li>Residential fire alarms/ detector activations</li>
+    </ul>
+    <h5>Truck 1</h5>
+    <ul>
+      <li>All lift assists / and non-injury falls</li>
+      <li>Second out MVA's in sta. 1 district</li>
+      <li>Second out / extrication assists in other districts (per proximity)</li>
+      <li>Structure fires</li>
+      <li>Second out EMS responses</li>
+      <li>Commercial alarms / second out residential alarms</li>
+    </ul>
+    <h5>Squad 1</h5>
+    <ul>
+      <li>Grass fires - first out in all districts</li>
+      <li>Structure fires - all</li>
+      <li>Priority 3 EMS calls - all</li>
+      <li>Second out all medical calls</li>
+      <li>Smoke and CO detector service calls / beeping, batteries, faulty, etc. - all</li>
+      <li>Burn complaints / area checks</li>
+      <li>Additional personnel requests / lifting, extra hands, etc. for apparatus already assigned to an incident</li>
+    </ul>
+    <h5>Notes</h5>
+    <ul>
+      <li>Lucas CPR devices will be equipped on battalion 1, squad 1, and engine 2</li>
+      <li>Brush 5 will respond to all mutual aid requests for a brush truck with a crew of 4</li>
+    </ul>
+  </div>
+</div>
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modals -->
 <div class="modal fade" id="addResourceGuideline" tabindex="-1" aria-labelledby="addResourceGuideline" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -202,6 +240,26 @@
         <form @submit.prevent="createGuideline()">
       <div class="modal-body text-center">
         <input placeholder="new station/zone title" class="w-75" type="text" v-model="newGuideline.title" required>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Create</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addResourceGuidelineList" tabindex="-1" aria-labelledby="addResourceGuidelineList" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Resource Guideline</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form @submit.prevent="createGuidelineList()">
+      <div class="modal-body text-center">
+        <input placeholder="title" class="w-75" type="text" v-model="newGuidelineList.title" required>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -227,10 +285,12 @@ export default {
       onMounted(() => {
       })
         const showCanyon = ref(true)
-         const newGuideline = ref({})
+        const newGuideline = ref({})
+        const newGuidelineList = ref({})
         return {
             showCanyon,
             newGuideline,
+            newGuidelineList,
             station1Resources: computed(() => AppState.resources["station1"]),
             station2Resources: computed(() => AppState.resources["station2"]),
             station3Resources: computed(() => AppState.resources["station3"]),
@@ -239,6 +299,7 @@ export default {
             adminResources: computed(() => AppState.resources["admin"]),
             displayedResource: computed(() => AppState.displayedResource),
             resourceGuidelines: computed(() => AppState.resourceGuidelines),
+            account: computed(() => AppState.account),
             renderResources(name){
               AppState.displayedResource = name
             },
@@ -246,6 +307,11 @@ export default {
               await resourceGuidelineService.createGuideline(newGuideline.value)
               Modal.getOrCreateInstance(document.getElementById('addResourceGuideline')).hide()
               newGuideline.value.title = null
+            },
+            async createGuidelineList(){
+              // await resourceGuidelineService.createGuideline(newGuideline.value)
+              // Modal.getOrCreateInstance(document.getElementById('addResourceGuideline')).hide()
+              // newGuideline.value.title = null
             }
         }
     }}
