@@ -11,8 +11,12 @@ class GroupService {
             const emsGroups = res.data.filter(g => g.type === 1)
 
             const fireGroups = res.data.filter(g => g.type === 2)
+
+            const I84Groups = res.data.filter(g => g.type === 3)
             AppState.emsGroups = emsGroups.map(g => new RunGroup(g))
             AppState.fireGroups = fireGroups.map(g => new RunGroup(g))
+
+            AppState.I84Groups = I84Groups.map(g => new RunGroup(g))
         } catch (error) {
             logger.error(error)
         }
@@ -32,8 +36,10 @@ class GroupService {
             const res = await api.post("/api/rungroups", body)
             if(res.data.type === 1){
               AppState.emsGroups.push(new RunGroup(res.data))
-            } else {
+            } else if(res.data.type === 2) {
               AppState.fireGroups.push(new RunGroup(res.data))
+            } else {
+                AppState.I84Groups.push(new RunGroup(res.data))
             }
         } catch (error) {
             logger.error(error)
@@ -47,9 +53,12 @@ class GroupService {
             if (updated.type === 1) {
                 let index = AppState.emsGroups.findIndex(g => g.id === updated.id)
                 AppState.emsGroups.splice(index, 1, updated)
-            } else {
+            } else if(updated.type === 2) {
                 let index = AppState.fireGroups.findIndex(g => g.id === updated.id)
                 AppState.fireGroups.splice(index, 1, updated)
+            } else {
+                let index = AppState.I84Groups.findIndex(g => g.id === updated.id)
+                AppState.I84Groups.splice(index, 1, updated)
             }
         } catch (error) {
             logger.error(error)
@@ -82,6 +91,8 @@ class GroupService {
             const res = await api.delete("/api/rungroups/" + id)
             AppState.emsGroups = AppState.emsGroups.filter(g => g.id !== id)
             AppState.fireGroups = AppState.fireGroups.filter(g => g.id !== id)
+
+            AppState.I84Groups = AppState.I84Groups.filter(g => g.id !== id)
         } catch (error) {
             logger.error(error)
         }

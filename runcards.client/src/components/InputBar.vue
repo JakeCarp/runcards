@@ -8,7 +8,7 @@
     <div class="text-center">
       <label for="radio">ASSIGNED CALL CHANNEL:</label>
       <select name="radio" class="ms-2 w-75">
-        <option v-for="channel in channels" :key="channel">{{channel}}</option>
+        <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
       </select>
     </div>
     <div class="my-3 text-center">
@@ -18,12 +18,8 @@
     <div  class="text-center">
       <label for="radio2">LEVEL 2 STAGING CHANNEL:</label>
       <select class="ms-2 w-75" name="radio2">
-        <option v-for="channel in channels" :key="channel">{{channel}}</option>
+        <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
       </select>
-    </div>
-    <div class="mt-5 mb-3 d-flex justify-content-around">
-      <button @click="navToMayday()" class="btn btn-danger">MAYDAY</button>
-      <button @click="navToEmergency()" class="btn btn-danger">EMERGENCY</button>
     </div>
     </div>
     </div>
@@ -32,16 +28,20 @@
 
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Timer from './Timer.vue'
 import { runGroupService } from '../services/RunGroupService'
 import {  useRouter } from 'vue-router'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
+import { channelService } from '../services/ChannelService'
 export default {
   components: { Timer },
   setup() {
+    onMounted(async () => {
+      await channelService.getChannels()
+    })
     const router = useRouter()
     const channels = computed(() => AppState.channels)
     const currentGroup = computed(() => AppState.currentGroup)

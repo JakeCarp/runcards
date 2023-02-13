@@ -1,109 +1,55 @@
-import { AppState } from "../AppState";
-import { Resouce } from "../models/Resouce";
-import { logger } from "../utils/Logger";
-import { api } from "./AxiosService";
+import { AppState } from "../AppState"
+import { Resource } from "../models/Resource"
+import { logger } from "../utils/Logger"
+import { api } from "./AxiosService"
 
-
-class ResourceService{
-  async getDepartmentResources(){
-    console.log("resourceService");
-    try {
-      const res = await api.get("/api/resouce")
-
-    //   const res = {
-    //     data: [
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : false,
-    //       agency : 'NFD Resource',
-    //       station: {
-    //         name: "station 1"
-    //       }
-    //     },
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : false,
-    //       agency : 'NFD Resource',
-    //       station: {
-    //         name: "station 4"
-    //       }
-    //     },
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : false,
-    //       agency : 'NFD Resource',
-    //       station: {
-    //         name: "station 3"
-    //       }
-    //     },
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : false,
-    //       agency : 'NFD Resource',
-    //       station: {
-    //         name: "station 5"
-    //       }
-    //     },
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : false,
-    //       agency : 'NFD Resource',
-    //       station: {
-    //         name: "station 2"
-    //       }
-    //     },
-    //     {
-    //       id: 1,
-    //       unitNumber : "E1",
-    //       type : "Paramedic Engine",
-    //       minStaff : 3,
-    //       alwaysStaffed : true,
-    //       stationId : 1,
-    //       admin : true,
-    //       agency : 'NFD Resource',
-    //     }
-    //   ]
-    // }
-      res.data.forEach(r => {
-        new Resouce(r);
-        if(r.admin){
-          AppState.resources["admin"].push(r)
-        } else {
-          let stationNameArr = r.station.name.split(" ")
-          let stationName = stationNameArr[0] + stationNameArr[1]
-          AppState.resources[stationName].push(r)
+class ResourceService {
+    async getResources() {
+        try {
+            const res = await api.get("/api/resource")
+            res.data.forEach(r => {
+              new Resouce(r);
+              if(r.admin){
+                AppState.resources["admin"].push(r)
+              } else {
+                let stationNameArr = r.station.name.split(" ")
+                let stationName = stationNameArr[0] + stationNameArr[1]
+                AppState.resources[stationName].push(r)
+              }
+            })
+        } catch (error) {
+            logger.error(error)
         }
-      })
-    } catch (error) {
-      logger.error(error)
     }
-  }
+
+    async createResource(body) {
+        try {
+            const res = await api.post("/api/resource", body)
+            AppState.resources.push(new Resource(res.data))
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+    async updateResource(body) {
+        try {
+            const res = await api.put("/api/resource/" + body.id, body)
+            let updated = new Resource(res.data)
+            let index = AppState.resources.findIndex(r => r.id === updated.id)
+            AppState.resources.splice(index, 1, updated)
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+    async deleteResource(id) {
+        try {
+            await api.delete("/api/resource/" + id)
+           AppState.resources = AppState.resources.filter(r => r.id !== id)
+        } catch (error) {
+            logger.error(error)
+        }
+    }
 }
 
-
-export const resourceService = new ResourceService();
+export const resourceService = new ResourceService()
