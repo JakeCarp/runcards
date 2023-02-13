@@ -27,7 +27,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   api.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
   await accountService.getAccount()
-  await resourceService.getDepartmentResources()
+  await resourceService.getResources()
   await resourceGuidelineService.getResourceGuidelines()
   socketService.authenticate(AuthService.bearer)
 })
