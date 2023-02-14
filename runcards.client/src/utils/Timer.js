@@ -38,5 +38,5 @@ export default function countdown( elementName, minutes, seconds, audioAlertName
         }
     }
 
-    updateTimer();
+    setInterval(updateTimer(), 100)
 }
