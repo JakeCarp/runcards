@@ -7,7 +7,16 @@ class ResourceService {
     async getResources() {
         try {
             const res = await api.get("/api/resource")
-            AppState.resources = res.data.map(r => new Resource(r))
+            res.data.forEach(r => {
+              new Resouce(r);
+              if(r.admin){
+                AppState.resources["admin"].push(r)
+              } else {
+                let stationNameArr = r.station.name.split(" ")
+                let stationName = stationNameArr[0] + stationNameArr[1]
+                AppState.resources[stationName].push(r)
+              }
+            })
         } catch (error) {
             logger.error(error)
         }
@@ -21,7 +30,7 @@ class ResourceService {
             logger.error(error)
         }
     }
-    
+
     async updateResource(body) {
         try {
             const res = await api.put("/api/resource/" + body.id, body)

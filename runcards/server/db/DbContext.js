@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import { AccountSchema } from '../models/Account'
+import { ResourceGuidelineListchema } from "../models/ResouceGuidelineList";
+import { ResourceGuidelineSchema } from "../models/ResourceGuideline";
 import { ChannelSchema } from '../models/Channel';
 import { ResourceSchema } from '../models/Resource';
 import { RunCardSchema } from '../models/RunCard';
@@ -13,6 +15,9 @@ class DbContext {
   Account = mongoose.model('Account', AccountSchema);
   RunGroup = mongoose.model('RunGroup', RunGroupSchema);
   RunCard = mongoose.model('RunCard', RunCardSchema);
+  ResourceGuideline = mongoose.model('ResourceGuideline', ResourceGuidelineSchema);
+
+  ResourceGuidelineList = mongoose.model('ResourceGuidelineList', ResourceGuidelineListchema);
   Channel = mongoose.model('Channel', ChannelSchema);
   Resource = mongoose.model('Resource', ResourceSchema);
   Station = mongoose.model('Station', StationSchema);

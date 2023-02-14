@@ -17,5 +17,16 @@ export const AppState = reactive({
   selectedStation: '',
   selectedZone: '',
   currentCard: {},
-  timeElapsed: 0
+  resources: {
+    station1: [],
+    station2: [],
+    station3: [],
+    station4: [],
+    station5: [],
+    admin: []
+  },
+  timeElapsed: 0,
+  displayedResource: "station1",
+  resourceGuidelines: [],
+  resourceGuidelineLists: []
 })
