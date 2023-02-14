@@ -8,13 +8,16 @@ class ZoneService {
         try {
             const res = await api.get("/api/zone")
 
+            let dict = {}
             res.data.forEach(z => {
-                if (AppState.zones[z.stationId]) {
-                    AppState.zones[z.stationId].push(new Zone(z))
+                if (dict[z.stationId]) {
+                    dict[z.stationId].push(new Zone(z))
                 } else {
-                    AppState.zones[z.stationId] = [new Zone(z)]
+                    dict[z.stationId] = [new Zone(z)]
                 }
             })
+
+            AppState.zones = dict
         } catch (error) {
             logger.error(error)
         }
