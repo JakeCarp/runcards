@@ -54,9 +54,9 @@ export default {
         } else {
             runGroupService.setCurrentGroup(props.group)
             if (props.group.cards.length > 0) {
-              router.push({name: "group", params: {groupId: props.group.id, cardId: props.group.cards[0]}, query: {station: station.value, zone: zone.value}})
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id, cardId: props.group.cards[0]}})
             } else {
-              router.push({ name: "group", params: { groupId: props.group.id }, query: { station: station.value, zone: zone.value } })
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id} })
               }
             }
           },
@@ -84,7 +84,13 @@ export default {
   min-height: 25vh;
 }
 
-
+body.darkmode--activated h4,
+body.darkmode--activated p,
+body.darkmode--activated button,
+body.darkmode--activated li,
+body.darkmode--activated a {
+  color: #fff !important
+}
 
 .menu {
   z-index: 10000;

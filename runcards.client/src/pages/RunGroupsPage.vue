@@ -6,12 +6,13 @@
   </div>
 <div class="container">
   <div class="row">
-    <div v-if="account.admin" class="col-md-10 offset-md-2 text-end mt-2">
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aundefineda">
-        Create Run Card Group
-      </button>
+    <div class="col-md-9 offset-md-3 d-flex justify-content-center my-4">
+      <img class="img-fluid" v-if="selectedZone.name === 'WR241'" src="../assets/img/WR241.png" />
+      <img class="img-fluid" v-if="selectedZone.name === 'WR412'" src="../assets/img/WR412.png" />
+      <img class="img-fluid" v-if="selectedZone.name === 'WR214'" src="../assets/img/WR214.png"/>
     </div>
+  </div>
+  <div class="row">
     <div v-if="!selectedZone" class="col-md-10 offset-md-2 text-center">
       <h3>Please Select A Zone</h3>
     </div>
@@ -24,6 +25,7 @@
       <h2>Zone: {{selectedZone.name}}</h2>
     </div>
   </div>
+
   <div v-if="selectedZone" class="row">
     <div class="col-md-10 offset-md-2 text-center">
       <h3>

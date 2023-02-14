@@ -6,9 +6,9 @@ import { api } from './AxiosService'
 import { runGroupService } from './RunGroupService'
 
 class CardService {
-    setZone(station, zone) {
-        AppState.selectedStation = station
-        AppState.selectedZone = zone
+    setZone(stationId, zoneId) {
+        AppState.selectedStation = AppState.stations.find(s => s.id === stationId)
+        AppState.selectedZone = AppState.zones[stationId].find(z => z.id === zoneId)
     }
 
     async getCardsInGroup(groupId) {

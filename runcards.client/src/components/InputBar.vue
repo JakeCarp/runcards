@@ -1,12 +1,12 @@
 <template>
   <div class="input">
-    <div class="card shadow">
-      <div class="card-body">
+    <div class="shadow">
+      <div class=" p-3">
     <div>
       <Timer v-if="currentGroup.type === 2"></Timer>
     </div>
     <div class="text-center">
-      <label for="radio">ASSIGNED CALL CHANNEL:</label>
+      <label for="radio">TAC CHANNEL:</label>
       <select name="radio" class="ms-2 w-75">
         <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
       </select>
@@ -90,5 +90,4 @@ export default {
 
 
 <style lang="scss" scoped>
-
 </style>

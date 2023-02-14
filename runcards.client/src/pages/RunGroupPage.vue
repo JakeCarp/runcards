@@ -4,27 +4,17 @@
             <div class="col-md-3 d-none d-md-block pt-0">
                 <RelatedCards></RelatedCards>
             </div>
-            <div v-if="currentCard" class="card col-md-6 pt-3 mt-2 shadow">
-                <div  class="text-center mb-3">
+            <div v-if="currentCard" class=" col-md-6 pt-3 mt-2 shadow card-container">
+                <div  class="text-center mb-3 info-bar">
                     <h3>{{ currentGroup.title }} </h3>
                 </div>
-                <div v-if="!edit" class="card-header text-center">
-                <span><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation}} - Zone {{ selectedZone }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
+                <div v-if="!edit" class="text-center">
+                <span class="edit-btn"><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation && currentGroup.title !== 'I-84'"> - {{ selectedStation.name }} - Zone {{ selectedZone.name }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
                 </div>
-                <div v-if="edit" class="card-header text-center">
+                <div v-if="edit" class="text-center">
                     <input v-model="editCard.title" type="text"> <span><i @click="updateCard()" class="mdi mdi-check selectable"></i></span>
                 </div>
-                <editor
-                class="editor"
-                output-format="html"
-                :disabled="!account.admin"
-                :api-key="tinyApiKey"
-                :init="{
-                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak advlist lists nonbreaking anchor insertdatetime  wordcount help charmap quickbars emoticons',
-                menubar: 'file edit view insert format tools table help',
-                toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
-                }"
-                v-model="cardContent" />
+                <QuillEditor class="quill" :content="cardContent"  v-model:content="cardContent" toolbar="full" theme="snow" content-type="html"></QuillEditor>
                 <button v-if="account.admin" class="btn btn-primary my-3" @click="saveCardContent()">Save Card Content</button>
             </div>
             <div class="card col-md-6 pt-3 my-3 shadow" v-else>
@@ -42,8 +32,10 @@
 
 
 <script>
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import Editor from '@tinymce/tinymce-vue'
-import { computed, onBeforeMount, ref, watch, watchEffect } from '@vue/runtime-core'
+import { computed, onBeforeMount, onMounted, ref, watch, watchEffect } from '@vue/runtime-core'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
 import { runCardService } from '../services/RunCardService'
@@ -55,19 +47,23 @@ import RunCardFormModal from '../components/RunCardFormModal.vue'
 import { runGroupService } from '../services/RunGroupService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { stationService } from '../services/StationService';
+import { zoneService } from '../services/ZoneService';
 
 export default {
-    components: { 'editor': Editor },
+    components: {
+        'editor': Editor,
+    QuillEditor},
     setup() {
         onBeforeMount(async () => {
             await runGroupService.getGroupById(route.params.groupId)
             await runCardService.getCardsInGroup(route.params.groupId);
+            await stationService.getStations()
+            await zoneService.getZones()
             if (route.params.cardId) {
                 runCardService.setCurrentCard(cards.value.find(c => c.id === route.params.cardId))
             }
-            if (route.query.station.length > 0) {
-                runCardService.setZone(route.query.station, route.query.zone)
-            }
+             runCardService.setZone(route.params.stationId, route.params.zoneId)
 
             AppState.timeElapsed = 0
         })
@@ -85,6 +81,12 @@ export default {
             editCard.value = currentCard.value
             cardContent.value = currentCard.value?.content
         })
+        watchEffect(() => {
+            if (account.value.admin && account.value.admin === false) {
+                console.log(document.getElementsByClassName('ql-toolbar'))
+                document.getElementsByClassName('ql-toolbar')[0].classList.add('d-none')
+            }
+       })
         return {
             edit,
             editCard,
@@ -137,7 +139,16 @@ export default {
 
 
 <style lang="scss" scoped>
+
 .editor {
     height: 100%;
+}
+
+.card-container {
+    height: 100%;
+}
+
+.ql-editor {
+    overflow-y: scroll;
 }
 </style>
