@@ -137,3 +137,29 @@ form:invalid button[type="submit"] {
   filter: grayscale(1);
   pointer-events: none;
 }
+
+body.darkmode--activated h4,
+body.darkmode--activated p,
+body.darkmode--activated button,
+body.darkmode--activated ul li
+{
+  color: #fff !important;
+}
+body.darkmode--activated span,
+body.darkmode--activated a {
+  color: #fff !important;
+}
+
+.darkmode--activated .info-bar .edit-btn {
+  color: #fff;
+}
+
+
+body.darkmode--activated .ql-container .ql-editor p,
+body.darkmode--activated .quill .ql-editor li {
+  color: #fff;
+}
+
+.darkmode--activated button.info-btn {
+  background-color: #996443;
+}

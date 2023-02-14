@@ -17,7 +17,7 @@
           </li>
         </ul>
             <div class="bottom mb-3">
-              <button class="btn btn-primary mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
+              <button class="btn btn-primary mx-2 info-btn" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
               <button class="btn btn-danger mx-2" @click="logout()"
                 aria-controls="logout">Logout</button>
@@ -54,7 +54,8 @@ export default {
     }
   }
 </script>
-<style>
+<style lang="scss" scoped>
+
 .sidenav{
   width: 280px;
   height: 90vh;

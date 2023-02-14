@@ -4,27 +4,16 @@
             <div class="col-md-3 d-none d-md-block pt-0">
                 <RelatedCards></RelatedCards>
             </div>
-            <div v-if="currentCard" class="card col-md-6 pt-3 mt-2 shadow">
-                <div  class="text-center mb-3">
+            <div v-if="currentCard" class=" col-md-6 pt-3 mt-2 shadow card-container">
+                <div  class="text-center mb-3 info-bar">
                     <h3>{{ currentGroup.title }} </h3>
                 </div>
-                <div v-if="!edit" class="card-header text-center">
-                <span><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation"> - {{ selectedStation.name }} - Zone {{ selectedZone.name }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
+                <div v-if="!edit" class="text-center">
+                <span class="edit-btn"><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation && currentGroup.title !== 'I-84'"> - {{ selectedStation.name }} - Zone {{ selectedZone.name }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
                 </div>
-                <div v-if="edit" class="card-header text-center">
+                <div v-if="edit" class="text-center">
                     <input v-model="editCard.title" type="text"> <span><i @click="updateCard()" class="mdi mdi-check selectable"></i></span>
                 </div>
-                <!-- <editor
-                class="editor"
-                output-format="html"
-                :disabled="!account.admin"
-                :api-key="tinyApiKey"
-                :init="{
-                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak advlist lists nonbreaking anchor insertdatetime  wordcount help charmap quickbars emoticons',
-                menubar: 'file edit view insert format tools table help',
-                toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
-                }"
-                v-model="cardContent" /> -->
                 <QuillEditor class="quill" :content="cardContent"  v-model:content="cardContent" toolbar="full" theme="snow" content-type="html"></QuillEditor>
                 <button v-if="account.admin" class="btn btn-primary my-3" @click="saveCardContent()">Save Card Content</button>
             </div>
@@ -113,7 +102,6 @@ export default {
                 try {
                     let updatedCard = currentCard.value
                     updatedCard.content = cardContent.value
-                    console.log(updatedCard.content)
                     await runCardService.updateCard(updatedCard, updatedCard.id)
                     Pop.toast("Run Card Content Updated!", 'success')
                 } catch (error) {
@@ -151,11 +139,16 @@ export default {
 
 
 <style lang="scss" scoped>
+
 .editor {
     height: 100%;
 }
 
-.quill {
+.card-container {
+    height: 100%;
+}
+
+.ql-editor {
     overflow-y: scroll;
 }
 </style>

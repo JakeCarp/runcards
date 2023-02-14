@@ -49,8 +49,6 @@ export default {
           zone,
           router,
       navToCardPage() {
-        console.log(station)
-        console.log(zone)
         if (station.value.length <= 0) {
           Pop.toast('Please select a zone before proceeding!', 'error')
         } else {
@@ -86,7 +84,13 @@ export default {
   min-height: 25vh;
 }
 
-
+body.darkmode--activated h4,
+body.darkmode--activated p,
+body.darkmode--activated button,
+body.darkmode--activated li,
+body.darkmode--activated a {
+  color: #fff !important
+}
 
 .menu {
   z-index: 10000;
