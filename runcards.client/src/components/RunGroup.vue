@@ -1,5 +1,5 @@
 <template>
-        <div @click="navToCardPage()" :class="group.type == 1 ? 'ems': 'fire'" class="card cursor col-md-3 col-4 m-3 selectable">
+        <div @click="navToCardPage()" :class="group.type == 1 ? 'ems': group.type == 2 ? 'fire' : 'I84'" class="widget cursor col-md-3 col-4 m-3 selectable">
           <div v-if="account.admin" class="dropdown ms-3 mt-3 d-flex justify-content-end">
             <button @click.stop aria-label="dropdown button" id="dropDownMenu"
               data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn btn-outline-primary">
@@ -15,12 +15,9 @@
               </li>
             </ul>
           </div>
-            <div class="card-body">
+            <div>
                 <h4 class="card-title mb-4">{{group.title}}</h4>
                 <p class="card-text mb-4">{{group.description}}</p>
-                <p class="card-text text-end bottom">
-                  Begin Situation <i class="fas fa-arrow-right cursor-pointer"></i>
-                   </p>
             </div>
             <RunGroupFormModal :group="group"></RunGroupFormModal>
         </div>
@@ -57,9 +54,9 @@ export default {
         } else {
             runGroupService.setCurrentGroup(props.group)
             if (props.group.cards.length > 0) {
-              router.push({name: "group", params: {groupId: props.group.id, cardId: props.group.cards[0]}, query: {station: station.value, zone: zone.value}})
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id, cardId: props.group.cards[0]}})
             } else {
-              router.push({ name: "group", params: { groupId: props.group.id }, query: { station: station.value, zone: zone.value } })
+              router.push({ name: "group", params: { groupId: props.group.id, stationId: station.value.id, zoneId: zone.value.id} })
               }
             }
           },
@@ -80,12 +77,19 @@ export default {
 
 
 <style lang="scss" scoped>
-
-.card{
+.widget{
     border-radius: .5em;
       box-shadow: 0 1.5em 2.5em -.5em rgba(#000000, .1);
   transition: transform .45s ease, background .45s ease;
   min-height: 25vh;
+}
+
+body.darkmode--activated h4,
+body.darkmode--activated p,
+body.darkmode--activated button,
+body.darkmode--activated li,
+body.darkmode--activated a {
+  color: #fff !important
 }
 
 .menu {
@@ -104,10 +108,13 @@ border-top: solid hsl(180, 62%, 55%);
   border-top: solid hsl(0, 78%, 62%)
 }
 
+.I84 {
+  border-top: solid hsl(23, 70%, 50%)
+}
+
 .bottom{
   position: absolute;
   bottom: 5px;
   right: 20px;
 }
-
 </style>

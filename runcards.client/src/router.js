@@ -18,7 +18,7 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/group/:groupId/card/:cardId?',
+    path: '/group/:groupId/station/:stationId/zone/:zoneId/card/:cardId?',
     name: 'group',
     component: loadPage('RunGroupPage'),
     beforeEnter: authGuard
@@ -33,6 +33,12 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     // beforeEnter: authGuard
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: loadPage('AdminPage'),
+    beforeEnter: authGuard
   }
 ]
 

@@ -1,10 +1,6 @@
 <template>
   <header class="container-fluid m-0 p-0">
-    <div class="row m-0">
-      <div class="col-3 d-none d-md-block sidebar pl-0 pr-2 pt-0" v-if="(route.name !== 'Home')">
-        <side-nav v-if="(route.name !== 'group')"></side-nav>
-      </div>
-    </div>
+   
   </header>
 
   <main>

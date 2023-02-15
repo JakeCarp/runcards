@@ -28,6 +28,7 @@
                                 <select v-model="groupData.type" class="form-control" id="groupTypeSelect" required>
                                     <option value="1">EMS</option>
                                     <option value="2">Fire</option>
+                                    <option value="3">I84 and HWY 55</option>
                                 </select>
                             </div>
                         </div>

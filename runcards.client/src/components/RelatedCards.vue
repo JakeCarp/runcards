@@ -1,10 +1,10 @@
 <template>
-    <div class="flex-shrink-0 p-3 bg-white relatedCards mt-2 shadow ">
+    <div class="flex-shrink-0 p-3 relatedCards mt-2 shadow ">
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none ">
             <router-link to="/groups" class="fs-5 fw-semibold">Home</router-link>
         </div>
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-            <span class="fs-5 fw-semibold">Related Cards</span>
+            <h4 class="fs-5 fw-semibold">Related Cards</h4>
         </div>
         <ul v-if="cards.length > 0" class="list-unstyled ps-0 scroll">
             <li v-for="card in cards" :key="card.id" @click="setCurrentCard(card)" :class="currentCard.id === card.id ? 'mb-2 selectable current' : 'mb-2 selectable'">
@@ -45,7 +45,7 @@ export default {
             currentCard,
             setCurrentCard(card) {
                 runCardService.setCurrentCard(card)
-                router.push({ name: "group", params: { groupId: card.groupId, cardId: card.id }, query: {station: selectedStation.value, zone: selectedZone.value} })
+                router.push({ name: "group", params: { groupId: card.groupId, cardId: card.id, stationId: selectedStation.value.id, zoneId: selectedZone.value.id } })
             }
         }
     }}
@@ -53,7 +53,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .relatedCards {
     height: 90vh;
     border-radius: 0.375rem;
@@ -67,5 +66,4 @@ export default {
     overflow-y: auto;
     height: 60vh;
 }
-
 </style>
