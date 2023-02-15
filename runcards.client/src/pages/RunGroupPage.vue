@@ -8,7 +8,7 @@
                 <div  class="text-center mb-3 info-bar">
                     <h3>{{ currentGroup.title }} </h3>
                 </div>
-                <div v-if="!edit" class="text-center">
+                <div v-if="!edit" class="text-center info-bar">
                 <span class="edit-btn"><i @click="edit = !edit" class="mdi mdi-pencil selectable"></i></span> {{ currentCard.title }}<span v-if="selectedStation && currentGroup.title !== 'I-84'"> - {{ selectedStation.name }} - Zone {{ selectedZone.name }}</span> <span class="justify-self-end"><i @click="removeCard()" class="mdi mdi-trash-can text-danger selectable"></i></span>
                 </div>
                 <div v-if="edit" class="text-center">

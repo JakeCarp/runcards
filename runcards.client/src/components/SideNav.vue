@@ -1,7 +1,7 @@
 <template>
       <div class="flex-shrink-0 p-3  sidenav mt-2 shadow ">
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <span class="fs-5 fw-semibold">NFD Stations</span>
+          <h4 class="fs-5 fw-semibold">NFD Stations</h4>
         </div>
         <ul class="list-unstyled ps-0 scroll">
           <li v-for="station in stations" :key="station.id" class="mb-2">

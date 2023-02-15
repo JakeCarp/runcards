@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-shrink-0 p-3 bg-white relatedCards mt-2 shadow ">
+    <div class="flex-shrink-0 p-3 relatedCards mt-2 shadow ">
         <div class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none ">
             <router-link to="/groups" class="fs-5 fw-semibold">Home</router-link>
         </div>
