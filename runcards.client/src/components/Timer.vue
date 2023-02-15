@@ -18,7 +18,7 @@ import countdown from "../utils/Timer";
 export default {
   setup(){
     onMounted(() => {
-      countdown("time", 10, 0, "timeElapsedAlert")
+      countdown("time", 1, 0, "timeElapsedAlert")
     })
     onUnmounted(() => {
       AppState.timeElapsed = 0

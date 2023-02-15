@@ -1,5 +1,5 @@
 import { AppState } from "../AppState";
-
+import { clearInterval, clearTimeout, setInterval, setTimeout } from 'worker-timers';
 /**
  *
  * @param {string} elementName
@@ -34,9 +34,9 @@ export default function countdown( elementName, minutes, seconds, audioAlertName
             hours = time.getUTCHours();
             mins = time.getUTCMinutes();
             element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+            window.setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
         }
     }
 
-    setInterval(updateTimer(), 100)
+    window.setInterval(updateTimer(), 100)
 }
