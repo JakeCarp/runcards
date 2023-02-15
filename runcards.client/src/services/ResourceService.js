@@ -7,16 +7,7 @@ class ResourceService {
     async getResources() {
         try {
             const res = await api.get("/api/resource")
-            res.data.forEach(r => {
-              new Resouce(r);
-              if(r.admin){
-                AppState.resources["admin"].push(r)
-              } else {
-                let stationNameArr = r.station.name.split(" ")
-                let stationName = stationNameArr[0] + stationNameArr[1]
-                AppState.resources[stationName].push(r)
-              }
-            })
+            AppState.resources = res.data.map(r => new Resource(r))
         } catch (error) {
             logger.error(error)
         }

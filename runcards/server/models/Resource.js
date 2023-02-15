@@ -9,12 +9,12 @@ export const ResourceSchema = new Schema(
         alwaysStaffed: {type: Boolean, required: true},
         stationId: { type: Schema.Types.ObjectId, ref: 'Station', required: true },
         admin: { type: Boolean, required: true },
-    }
+    }, { timestamps: true, toJSON: { virtuals: true } }
 )
 
 ResourceSchema.virtual('station', {
     localField: 'stationId',
+    ref: 'Station',
     foreignField: '_id',
-    justOne: true,
-    ref: 'Station'
+    justOne: true
 })
