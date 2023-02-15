@@ -295,7 +295,7 @@ export default {
             station2Resources: computed(() => AppState.resources.filter(r => r.station.name === 'Station 2')),
             station3Resources: computed(() => AppState.resources.filter(r => r.station.name === 'Station 3')),
             station4Resources: computed(() => AppState.resources.filter(r => r.station.name === 'Station 4')),
-            station5Resources: computed(() => AppState.resources.filter(r => r.station.name === 'station 5')),
+            station5Resources: computed(() => AppState.resources.filter(r => r.station.name === 'Station 5')),
             adminResources: computed(() => AppState.resources.filter(r => r.station.name === 'Administration')),
             displayedResource: computed(() => AppState.displayedResource),
             resourceGuidelines: computed(() => AppState.resourceGuidelines),
