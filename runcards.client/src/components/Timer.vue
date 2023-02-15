@@ -1,9 +1,9 @@
 <template>
-  <div class="component">
+  <div class="timer">
     <h1 id="time" class="text-center my-2">10:00</h1>
     <i class=" m-2 animate__flash animate__animated mdi mdi-timer-sand-full" v-for="n in timeElapsed" :key="n"></i>
     <audio id="timeElapsedAlert">
-  <source src="../assets/alerts/dpatch.client_src_assets_alerts_timeElapsedAlert.mp3" type="audio/ogg">
+  <source src="../assets/alerts/316835__lalks__alarm-01-long.wav" type="audio/ogg">
   Your browser does not support the audio tag.
 </audio>
   </div>
