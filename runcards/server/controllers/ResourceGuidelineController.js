@@ -11,7 +11,7 @@ export class ResourceGuidelineController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAllGuidelines)
-      .get('/:id', this.getGuidelineListsByGuidelineId)
+      .get('/:id/lists', this.getGuidelineListsByGuidelineId)
       .use(CheckRole)
       .post('', this.create)
       .put('/:id', this.update)
