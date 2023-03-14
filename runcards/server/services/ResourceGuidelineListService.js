@@ -7,19 +7,19 @@ class ResourceGuidelineListService{
     return lists
   }
   async delete(id) {
-    await dbContext.ResourceGuideline.findByIdAndDelete(id)
+    await dbContext.ResourceGuidelineList.findByIdAndDelete(id)
     return 'ResourceGuideline Deleted'
   }
   async update(body, id) {
-    const updatedGuideline = await dbContext.ResourceGuideline.findByIdAndUpdate(id, body, { new: true })
+    const updatedGuideline = await dbContext.ResourceGuidelineList.findByIdAndUpdate(id, body, { new: true })
     return updatedGuideline
   }
   async create(body) {
-    const newGuideline = await dbContext.ResourceGuideline.create(body)
+    const newGuideline = await dbContext.ResourceGuidelineList.create(body)
     return newGuideline
   }
   async getAllGuidelines() {
-    const guidelines = await dbContext.ResourceGuideline.find()
+    const guidelines = await dbContext.ResourceGuidelineList.find()
     return guidelines
   }
 

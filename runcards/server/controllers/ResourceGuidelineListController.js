@@ -14,16 +14,6 @@ export class ResourceGuidelineListController extends BaseController {
       .put('/:id', this.update)
       .delete('/:id', this.delete)
   }
-
-  async getAllGuidelines(req, res, next) {
-    try {
-      const form = await resourceGuidelineListService.getAllGuidelines()
-      res.send(form)
-    } catch (error) {
-      next(error)
-    }
-  }
-
   async create(req, res, next) {
     try {
       const newForm = await resourceGuidelineListService.create(req.body)
