@@ -15,14 +15,19 @@
               </ul>
             </div>
           </li>
+          <li>
+            <router-link :to="{ name: 'Admin' }" class="btn btn-info mx-2">
+              Admin Page
+            </router-link>
+          </li>
         </ul>
-            <div class="bottom mb-3">
+        
+        <div class="bottom mb-3">
               <button class="btn btn-primary mx-2 info-btn" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
               <button class="btn btn-danger mx-2" @click="logout()"
                 aria-controls="logout">Logout</button>
             </div>
-
       </div>
 
       
@@ -37,9 +42,11 @@ import { AuthService } from "../services/AuthService";
 import pop from '../utils/Pop'
 export default {
   setup() {
-    const stations = computed(() => AppState.stations.filter(s => s.name !== 'Administration'))
+    const stations = computed(() => AppState.stations.filter(s => s.name !== 'Administration')
+    )
     const zones = computed(() => AppState.zones)
     return {
+     
       setZone(station, zone) {
         runCardService.setZone(station, zone)
       },

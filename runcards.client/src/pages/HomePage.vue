@@ -67,7 +67,7 @@ export default {
       router,
       async login() {
         try {
-          await AuthService.loginWithPopup()
+          await AuthService.loginWithRedirect()
         } catch (error) {
           logger.error(error)
         }

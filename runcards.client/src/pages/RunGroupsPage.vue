@@ -15,6 +15,7 @@
   <div class="row">
     <div v-if="!selectedZone" class="col-md-10 offset-md-2 text-center">
       <h3>Please Select A Zone</h3>
+      <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#anulla">Create New Group</button>
     </div>
     
     <div v-if="selectedStation" class="col-md-10 offset-md-2 text-center">
