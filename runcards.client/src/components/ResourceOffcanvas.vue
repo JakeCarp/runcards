@@ -191,8 +191,8 @@
 <div class="row">
   <div class="col-12 text-end mt-3" v-if="account.admin && activeGuideline._id">
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addResourceGuidelineList" >Add Resource Guideline</button>
-    <button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#editResourceGuideline">Edit Station/Zone</button>
-    <button class="btn btn-danger mx-2" @click="deleteResourceGuide">Delete Station/Zone</button>
+    <button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#editResourceGuideline">Edit Resource Guideline</button>
+    <button class="btn btn-danger mx-2" @click="deleteResourceGuide">Delete Resource Guidline</button>
 </div>
   </div>
   <div class="col-12">
