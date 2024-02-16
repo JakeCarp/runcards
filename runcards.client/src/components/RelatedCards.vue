@@ -15,7 +15,7 @@
             <button class="btn btn-primary mx-2" data-bs-toggle="offcanvas" data-bs-target="#information"
                 aria-controls="information">Information</button>
 
-            <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Card</button>
+            <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#cardCreateModal">Create New Tab</button>
 
         </div>
     </div>

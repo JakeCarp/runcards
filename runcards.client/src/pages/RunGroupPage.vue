@@ -19,7 +19,7 @@
             </div>
             <div class="card col-md-6 pt-3 my-3 shadow" v-else>
                 <div class="card-body text-center">
-                    <h3>Create a New Run Card to begin!</h3>
+                    <h3>Create a New Tab to begin!</h3>
                 </div>
             </div>
             <div class="col-md-3 mt-2 ">

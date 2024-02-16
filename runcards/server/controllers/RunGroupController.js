@@ -11,8 +11,10 @@ export class RunGroupController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
       .get('/:id', this.getById)
+      .get('/zone/:zoneId', this.getByZoneId)
       .get('/specialGroup/mayday', this.getMayday)
       .get('/specialGroup/emergency', this.getEmergency)
+      // .put('', this.updateAll)
       .use(CheckRole)
       .post('', this.create)
       .put('/:id', this.update)
@@ -32,6 +34,15 @@ export class RunGroupController extends BaseController {
     try {
       const group = await runGroupService.getById(req.params.id)
       res.send(group)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getByZoneId(req, res, next) {
+    try {
+      const groups = await runGroupService.getByZoneId(req.params.zoneId)
+      res.send(groups)
     } catch (error) {
       next(error)
     }
@@ -73,6 +84,15 @@ export class RunGroupController extends BaseController {
       next(error)
     }
   }
+
+  // async updateAll(req, res, next) {
+  //   try {
+  //     const updated = await runGroupService.duplicateRunGroupsandCardsForAllZones()
+  //     res.send(updated)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async delete(req, res, next){
     try {

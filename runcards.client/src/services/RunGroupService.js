@@ -5,9 +5,9 @@ import { api } from './AxiosService'
 import { runCardService } from './RunCardService'
 
 class GroupService {
-    async getGroups() {
+    async getGroups(id) {
         try {
-            const res = await api.get("/api/rungroups")
+            const res = await api.get(`/api/rungroups/zone/${id}`)
             const emsGroups = res.data.filter(g => g.type === 1)
 
             const fireGroups = res.data.filter(g => g.type === 2)

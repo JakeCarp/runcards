@@ -13,9 +13,9 @@
     </div>
   </div>
   <div class="row">
-    <div v-if="!selectedZone" class="col-md-10 offset-md-2 text-center">
-      <h3>Please Select A Zone</h3>
-      <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#anulla">Create New Group</button>
+    <h3 v-if="!selectedZone">Please Select A Zone</h3>
+    <div v-if="selectedZone" class="col-md-10 offset-md-2 text-center">
+      <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#anulla">Create New Card</button>
     </div>
     
     <div v-if="selectedStation" class="col-md-10 offset-md-2 text-center">
@@ -78,7 +78,7 @@
 
 
 <script>
-import { computed, onMounted, ref } from '@vue/runtime-core'
+import { computed, onMounted, ref, watch } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { runGroupService } from '../services/RunGroupService'
 import Pop from '../utils/Pop'
@@ -94,7 +94,6 @@ export default {
       onMounted(async () => {
         await stationService.getStations()
         await zoneService.getZones()
-        await runGroupService.getGroups()
         runCardService.setCurrentCard({})
         runCardService.setCards([])
       })
@@ -104,6 +103,14 @@ export default {
       const fireGroups = computed(() => AppState.fireGroups)
         const I84Groups = computed(() => AppState.I84Groups)
         const account = computed(() => AppState.account)
+
+        watch(() => selectedZone.value.id, async (id) => {
+            if(id !== null){
+                await runGroupService.getGroups(id)
+            } else {
+                return
+            }
+        })
       return {
             I84Groups,
             account,

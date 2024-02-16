@@ -59,6 +59,7 @@ export default {
     },
     setup(props) {
         const groupData = ref({})
+        const selectedZone = computed(() => AppState.selectedZone)
         watchEffect(() => {
             groupData.value = {...props.group}
         })
@@ -70,7 +71,7 @@ export default {
                         await runGroupService.updateGroup(groupData.value, groupData.value.id)
                         Pop.toast('Run Card Group Edited!', 'success')
                     } else {
-                        await runGroupService.createGroup(groupData.value)
+                        await runGroupService.createGroup({...groupData, zoneId: selectedZone.id})
                         Pop.toast('Run Card Group Created!', 'success')
                         groupData.value = {}
                     }

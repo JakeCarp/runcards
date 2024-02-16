@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { logger } from '../utils/Logger'
 
 class RunGroupService {
   async getAll() {
@@ -9,6 +10,11 @@ class RunGroupService {
   async getById(id) {
     const group = await dbContext.RunGroup.findById(id)
     return group
+  }
+
+  async getByZoneId(id) {
+    const groups = await dbContext.RunGroup.find({zoneId: id})
+    return groups
   }
 
   async getMayday() {
@@ -37,6 +43,48 @@ class RunGroupService {
   async update(body, id) {
     const updatedGroup = await dbContext.RunGroup.findByIdAndUpdate(id, body, { new: true })
     return updatedGroup
+  }
+
+  async duplicateRunGroupsandCardsForAllZones() {
+    const runGroups = await this.getByZoneId('63e95d632d8e354e623eab2d')
+    const newRunGroups = []
+
+    
+    for (const runGroup of runGroups) {
+      const otherZones = await dbContext.Zone.find( {_id: {$ne: '63e95d632d8e354e623eab2d'}})
+
+
+
+      for (const zone of otherZones) {
+        
+        const duplicateRunGroup = await dbContext.RunGroup.create({
+          title: runGroup.title,
+          description: runGroup.description,
+          type: runGroup.type,
+          zoneId: zone._id, // Set the zoneId to the current zone
+          cards: [] // Clear the cards array for now
+        })
+
+        for(const card of runGroup.cards) {
+          const originalCard = await dbContext.RunCard.findById(card)
+          if(originalCard) {
+
+            const duplicateCard = await dbContext.RunCard.create({
+              title: originalCard.title,
+              content: originalCard.content,
+              groupId: duplicateRunGroup.id
+            });
+            
+            duplicateRunGroup.cards.push(duplicateCard.id)
+          }
+        }
+
+        await duplicateRunGroup.save()
+        newRunGroups.push(duplicateRunGroup)
+      }
+      
+    }
+    return newRunGroups
   }
 
   async delete(id) {
