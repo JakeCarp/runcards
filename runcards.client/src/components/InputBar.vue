@@ -5,11 +5,15 @@
     <div>
       <Timer v-if="currentGroup.type === 2"></Timer>
     </div>
-    <div class="text-center">
-      <label for="radio">TAC CHANNEL:</label>
-      <select name="radio" class="ms-2 w-75">
-        <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
-      </select>
+    <div class="text-center ">
+      <label class="col-12 mb-2" for="radio">TAC CHANNELS:</label>
+      <div class="row mb-2" v-for="index in duplicatedRowCount">
+        <input class="col-4 ms-3" type="text" placeholder="designation..."/>
+        <select name="radio" class="ms-2 col-5">
+          <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
+        </select>
+        <i @click="duplicateRow()" class="mdi col-2 mdi-24px mdi-plus coloredit selectable" />
+      </div>
     </div>
     <div class="my-3 text-center">
       <label for="staging">LEVEL 2 STAGING AREA:</label>
@@ -28,7 +32,7 @@
 
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Timer from './Timer.vue'
 import { runGroupService } from '../services/RunGroupService'
@@ -47,12 +51,18 @@ export default {
     const currentGroup = computed(() => AppState.currentGroup)
     const selectedStation = computed(() => AppState.selectedStation)
     const selectedZone = computed(() => AppState.selectedZone)
+    const duplicatedRowCount = ref(1);
     return {
+      duplicatedRowCount,
       selectedStation,
       selectedZone,
       router,
       currentGroup,
       channels,
+      duplicateRow() {
+        duplicatedRowCount.value == duplicatedRowCount.value++
+        console.log(duplicatedRowCount.value)
+      },
       async navToMayday() {
         try {
           const group = await runGroupService.getMaydayGroup()

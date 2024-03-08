@@ -46,7 +46,7 @@
 
 
 <script>
-import { ref, watchEffect } from '@vue/runtime-core'
+import { ref, watchEffect, computed } from '@vue/runtime-core'
 import { runGroupService } from '../services/RunGroupService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
