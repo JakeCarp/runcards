@@ -1,4 +1,8 @@
 {
   "appService.defaultWebAppToDeploy": "/subscriptions/913ac040-b114-42db-b9f8-f30829264322/AppServices/subscriptions/913ac040-b114-42db-b9f8-f30829264322/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/NFDRapidResponse",
-  "appService.deploySubpath": "."
+  "appService.deploySubpath": ".",
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ]
 }
