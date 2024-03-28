@@ -12,8 +12,8 @@
       <img class="img-fluid" v-if="selectedZone.name === 'WR214'" src="../assets/img/WR214.png"/>
     </div>
   </div>
-  <div class="row">
-    <h3 v-if="!selectedZone">Please Select A Zone</h3>
+  <div class="row justify-content-center align-items-center">
+    <!-- <h3 v-if="!selectedZone">Please Select A Zone</h3> -->
     <div v-if="selectedZone" class="col-md-10 offset-md-2 text-center">
       <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#anulla">Create New Card</button>
     </div>
