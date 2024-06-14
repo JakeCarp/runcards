@@ -5,12 +5,17 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form v-if="type === 'channel' || type === 'station' || type === 'zone'">
+                <form v-if="type === 'channel' || type === 'station' || type === 'zone' || type === 'alertsense'">
                     <div class="modal-body">
-                        <div class="form-card my-2">
+                        <div v-if="type !== 'alertsense'" class="form-card my-2">
                             <label for="ObjNameInput">Designation</label>
                             <input v-model="obj.name" type="text" class="form-control" id="ObjNameInput"
                                 placeholder="Designation..." required>
+                        </div>
+                        <div v-else class="form-card my-2">
+                            <label for="ObjNameInput">New Link</label>
+                            <input v-model="obj.name" type="text" class="form-control" id="ObjNameInput"
+                                placeholder="new link..." required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -143,6 +148,9 @@ export default {
                                 await zoneService.updateZone(obj.value)
                                 Pop.toast('Zone Successfully Edited!', 'success')
                                 break;
+                            case 'alertsense':
+                                await channelService.updateAlertsense(obj.value)
+                                Pop.toast('Alertsense Link Updated', 'success')
                             default:
                                 logger.error('Something went wrong')
                         }

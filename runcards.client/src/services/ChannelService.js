@@ -4,6 +4,25 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class ChannelService {
+
+    async getAlertsense() {
+        try {
+            const res = await api.get("/api/channel/alertsense")
+            AppState.alertSenseLink = res.data
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+    async updateAlertsense(newLink) {
+        try {
+            const res = await api.put("/api/channel/alertsense", newLink)
+            AppState.alertSenseLink = res.data
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+    
     async getChannels() {
         try {
             const res = await api.get("/api/channel")

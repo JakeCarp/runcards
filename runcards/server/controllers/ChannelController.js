@@ -8,11 +8,39 @@ export class ChannelController extends BaseController {
         super('api/channel')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
+            .get('/alertsense', this.getAlertsense)
             .get('', this.getChannels)
             .use(CheckRole)
             .post('', this.createChannel)
             .put('/:id', this.updateChannel)
             .delete('/:id', this.deleteChannel)
+    }
+
+    async getAlertsense(req, res, next) {
+        try {
+            const link = await channelService.getAlertsense()
+            res.send(link)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async updateAlertsense(req, res, next) {
+        try {
+            const newLink = await channelService.updateAlertsense(req.body)
+            res.send(newLink)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async createAlertsense(req, res, next) {
+        try {
+            const newLink = await channelService.createAlertsense("")
+            res.send(newLink)
+        } catch (error) {
+            next(error)
+        }
     }
     async getChannels(req, res, next) {
        try {

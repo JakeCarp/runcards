@@ -59,6 +59,7 @@ export default {
       account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup();
+        console.log('hit')
         router.push({ name: 'Run Groups' })
       },
       async logout() {

@@ -15,7 +15,7 @@
   <div class="row justify-content-center align-items-center">
     <!-- <h3 v-if="!selectedZone">Please Select A Zone</h3> -->
     <div v-if="selectedZone" class="col-md-10 offset-md-2 text-center">
-      <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#anulla">Create New Card</button>
+      <button v-if="account.admin" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#aundefineda">Create New Card</button>
     </div>
     
     <div v-if="selectedStation" class="col-md-10 offset-md-2 text-center">

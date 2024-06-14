@@ -42,7 +42,7 @@ import { AuthService } from "../services/AuthService";
 import pop from '../utils/Pop'
 export default {
   setup() {
-    const stations = computed(() => AppState.stations.filter(s => s.name !== 'Administration')
+    const stations = computed(() => AppState.stations.filter(s => s.name !== 'Administration' && s.name !== 'NFPD Training')
     )
     const zones = computed(() => AppState.zones)
     return {

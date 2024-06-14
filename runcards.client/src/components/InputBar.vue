@@ -28,6 +28,9 @@
             <option v-for="channel in channels" :key="channel">{{channel.name}}</option>
           </select>
         </div>
+        <div class="justify-content-center d-flex mt-3">
+          <a :href="alertSenseLink" target="_blank" class="btn big-btn btn-primary">Trigger Alertsense</a>
+        </div>
       </div>
     </div>
   </div>
@@ -42,6 +45,7 @@ import { useRouter } from 'vue-router'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import { channelService } from '../services/ChannelService'
+import App from '../App.vue'
 
 export default {
   components: { Timer },
@@ -55,6 +59,7 @@ export default {
     const currentGroup = computed(() => AppState.currentGroup)
     const selectedStation = computed(() => AppState.selectedStation)
     const selectedZone = computed(() => AppState.selectedZone)
+    const alertSenseLink = computed(() => AppState.alertSenseLink)
     const rows = ref([{ id: 0 }])
 
     const duplicateRow = (index) => {
@@ -66,6 +71,7 @@ export default {
 }
 
     return {
+      alertSenseLink,
       selectedStation,
       selectedZone,
       router,

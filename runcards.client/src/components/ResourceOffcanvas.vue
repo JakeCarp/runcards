@@ -137,20 +137,18 @@
                     data-bs-target="#expandedMutualAid" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body container-fluid text-dark">
-                <h1 class="text-center">Mutual Aid Resouce List</h1>
-                <div class="row text-center mt-4">
-                    <div class="col-md-2 col-4 grey tab me-2" :class="{ 'selected': showCanyon }" @click="showCanyon = true">
-                        <p class="mt-2 selectable">Canyon County</p>
+                <h3 class="text-center">Mutual Aid Resouce List</h3>
+                <div class="row text-center justify-content-between mt-4">
+                    <div class="col-5 grey tab me-2" :class="{ 'selected': showCanyon }" @click="showCanyon = true">
+                        <h1 class="mt-2 selectable"><strong>Canyon County</strong></h1>
                     </div>
-                    <div class="col-md-2 col-4 grey tab" :class="{ 'selected': !showCanyon }" @click="showCanyon = false">
-                        <p class="mt-2 selectable">Ada County</p>
+                    <div class="col-5 grey tab" :class="{ 'selected': !showCanyon }" @click="showCanyon = false">
+                        <h1 class="mt-2 selectable"><strong>Ada County</strong></h1>
                     </div>
                 </div>
-                <div class="row mutual-height ">
-                    <div class="col-12 mt-5 ">
-                        <img v-if="showCanyon" class="img-fluid mb-3" src="../assets/img/CanyonCountyResources.png" alt="">
-                        <img v-else class="img-fluid" src="../assets/img/AdaCountyResources.png" alt="">
-                    </div>
+                <div class="row mutual-height justify-content-center">
+                        <img v-if="showCanyon" class="img-fluid mb-3 mt-5" src="../assets/img/CanyonCountyResources.png" alt="">
+                        <img v-else class="img-fluid mt-5" src="../assets/img/AdaCountyResources.png" alt="">
                 </div>
             </div>
         </div>

@@ -7,6 +7,13 @@
         </div>
         <div class="row card mx-5 py-2">
             <div class="col-6 offset-md-3 text-center mb-4">
+            <h3>Alertsense</h3>
+            <div class="row">
+                <p class="col-10">{{ alertsense }}</p>
+                <button class="btn col-2" @click="openSimpleObjectModal('alertsense', alertsense)"><i class="mdi mdi-pencil selectable"></i></button>
+            </div>
+            </div>
+            <div class="col-6 offset-md-3 text-center mb-4">
             <h3>Channels</h3>
                 <table class="table table-striped">
                     <thead>
@@ -134,7 +141,9 @@ export default {
         const zones = computed(() => AppState.zones)
         const stations = computed(() => AppState.stations)
         const resources = computed(() => AppState.resources)
+        const alertsense = computed(() => AppState.alertSenseLink)
         return {
+            alertsense,
             stationId,
             formEdit,
             formType,

@@ -22,5 +22,6 @@ export const AppState = reactive({
   displayedResource: "station1",
   resourceGuidelines: [],
   resourceGuidelineLists: [],
-  activeResourceGuideline: {}
+  activeResourceGuideline: {},
+  alertSenseLink: 'thing'
 })

@@ -9,6 +9,7 @@ import { RunGroupSchema } from '../models/RunGroup';
 import { StationSchema } from '../models/Station';
 import { ValueSchema } from '../models/Value'
 import { ZoneSchema } from '../models/Zone';
+import { AlertsenseSchema } from '../models/Alertsense';
 
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
@@ -22,6 +23,8 @@ class DbContext {
   Resource = mongoose.model('Resource', ResourceSchema);
   Station = mongoose.model('Station', StationSchema);
   Zone = mongoose.model('Zone', ZoneSchema);
+
+  Alertsense = mongoose.model('Alertsense', AlertsenseSchema)
 
 }
 
